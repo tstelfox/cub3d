@@ -6,20 +6,27 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/05/13 15:37:26 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/10 12:34:45 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	data_init(t_data *mapdata)
+{
+	mapdata->resx = 0;
+	mapdata->resy = 0;
+}
+
 int		main(int argc, char *argv[])
 {
 	t_data	mapdata;
-	
+
 	data_init(&mapdata);
 	prs_wrld(&mapdata, argc, argv);
-
+	return (0);
 }
+
 
 
 

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/02 15:50:51 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/11 12:57:00 by tmullan       ########   odam.nl         */
+/*   Created: 2019/12/02 15:50:51 by tmullan       #+#    #+#                 */
+/*   Updated: 2020/06/04 16:13:32 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin1(char *s1, char *s2);
 size_t	ft_strlen(char *s);
-void	*ft_memmove(void *dst, void *src, size_t len);
-char	*ft_strdup(char *s1);
+void	*ft_memmove1(void *dst, void *src, size_t len);
+char	*ft_strdup1(char *s1);
 int		get_next_line(int fd, char **line);
 #endif

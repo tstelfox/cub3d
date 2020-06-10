@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/07 12:44:10 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/15 17:13:05 by tmullan       ########   odam.nl         */
+/*   Created: 2020/01/07 12:44:10 by tmullan       #+#    #+#                 */
+/*   Updated: 2020/06/04 16:13:54 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ int		processbuff(char *buff, char **line)
 
 	len = newline(buff);
 	if (!*line)
-		*line = ft_strdup(buff);
+		*line = ft_strdup1(buff);
 	else
-		*line = ft_strjoin(*line, buff);
+		*line = ft_strjoin1(*line, buff);
 	if (*line == NULL)
 		return (-1);
 	if (buff[0] == '\n')
 	{
-		ft_memmove(buff, buff + 1, ft_strlen(buff));
+		ft_memmove1(buff, buff + 1, ft_strlen(buff));
 		return (1);
 	}
 	if (!newline(buff))
 		return (0);
 	else
 	{
-		ft_memmove(buff, buff + (len + 1), ft_strlen(buff));
+		ft_memmove1(buff, buff + (len + 1), ft_strlen(buff));
 		return (1);
 	}
 }
@@ -66,27 +66,27 @@ int		remaining(char *buff, char **line)
 {
 	if (buff[0] == '\n')
 	{
-		*line = ft_strdup("");
-		ft_memmove(buff, buff + 1, ft_strlen(buff));
+		*line = ft_strdup1("");
+		ft_memmove1(buff, buff + 1, ft_strlen(buff));
 		return (*line == 0 ? -1 : 1);
 	}
 	if (newline(buff))
 	{
 		if (!*line)
 		{
-			*line = ft_strdup(buff);
-			ft_memmove(buff, buff + (newline(buff) + 1),
+			*line = ft_strdup1(buff);
+			ft_memmove1(buff, buff + (newline(buff) + 1),
 			ft_strlen(buff));
 			return (*line == 0 ? -1 : 1);
 		}
 		else
 		{
-			*line = ft_strjoin(*line, buff);
+			*line = ft_strjoin1(*line, buff);
 			return (*line == 0 ? -1 : 1);
 		}
 	}
 	else
-		*line = ft_strdup(buff);
+		*line = ft_strdup1(buff);
 	return (*line == 0 ? -1 : 0);
 }
 

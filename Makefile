@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/05/28 10:38:06 by tmullan       ########   odam.nl          #
+#    Updated: 2020/06/10 14:56:37 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ MLX_DIR = ./mlx
 GNL_DIR = ./gnl
 LIBFT = ./libft
 
-OBJ = testl.o
+OBJ = cub3d.o cub_parser.o utils.o
 	# testw.o
+	# testl.o
 	# testh.o
 	# testw.o
-	# cub3d.o parse_cub.o
 
 FLAGS = -Wall -Wextra -Werror
 
