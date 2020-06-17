@@ -6,69 +6,117 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/10 15:04:46 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/17 14:47:04 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_res(char *lineread, t_data *mapdata, int i)
+int		get_res(char *lineread, t_data *data, int i)
 {
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->resx = ft_atoi(&lineread[i]);
+	data->resx = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
-	mapdata->resy = ft_atoi(&lineread[i]);
+	data->resy = ft_atoi(&lineread[i]);
 	return (0);
 }
 
-int		get_floor(char *lineread, t_data *mapdata, int i)
+int		get_floor(char *lineread, t_data *data, int i)
 {
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->floor.t_rgb.r = ft_atoi(&lineread[i]);
+	data->floor.t_rgb.r = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->floor.t_rgb.g = ft_atoi(&lineread[i]);
+	data->floor.t_rgb.g = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->floor.t_rgb.b = ft_atoi(&lineread[i]);
+	data->floor.t_rgb.b = ft_atoi(&lineread[i]);
 	return (0);
 }
 
-int		get_ceiling(char *lineread, t_data *mapdata, int i)
+int		get_ceiling(char *lineread, t_data *data, int i)
 {
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->ceiling.t_rgb.r = ft_atoi(&lineread[i]);
+	data->ceiling.t_rgb.r = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->ceiling.t_rgb.g = ft_atoi(&lineread[i]);
+	data->ceiling.t_rgb.g = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
 	while (!ft_isdigit(lineread[i]))
 		i++;
-	mapdata->ceiling.t_rgb.b = ft_atoi(&lineread[i]);
+	data->ceiling.t_rgb.b = ft_atoi(&lineread[i]);
 	return (0);
 }
 
-int		get_map(char *lineread, t_data *mapdata)
+int		get_map(char *lineread, t_data *data)
 {
-	if (!mapdata->maptemp)
-		mapdata->maptemp = ft_strdup(lineread);
+	if (!data->maptemp)
+		data->maptemp = ft_strdup(lineread);
 	else
-		mapdata->maptemp = ft_strjoinnl(mapdata->maptemp, lineread);
+		data->maptemp = ft_strjoinnl(data->maptemp, lineread);
 	return (0);
 }
 
-int		prs_wrld(t_data *mapdata, int argc, char *argv[])
+void	east_dir(t_data *data)
+{
+	data->player.dirx = 0;
+	data->player.diry = -1;
+	data->player.planey = 0;
+	data->player.planex = 0.66;
+}
+
+void	player_pos(t_data *data, int i, int k)
+{
+	data->player.posx = (double)k;
+	data->player.posy = (double)i ;
+	if (data->maparr[i][k] == 'E')
+		east_dir(data);
+	// if (data->maparr[i][k] == 'N')
+	// 	;
+	// if (data->maparr[i][k] == 'S')
+	// 	;
+	// if (data->maparr[i][k] == 'W')
+	// 	;
+}
+
+void	player(t_data *data)
+{
+	int	i;
+	int	k;
+
+	i = 1;
+	k = 0;
+	while (data->maparr[i][k])
+	{
+		// printf("The full line is: %s\n", data->maparr[i]);
+		if (ft_isalpha(data->maparr[i][k]))
+		{
+			// printf("x and y are : %d %d\n", k, i);
+			// printf("The element is: %c\n", data->maparr[i][k]);
+			player_pos(data, i, k);
+			break ;
+		}
+		k++;
+		if (!data->maparr[i][k])
+		{
+			k = 0;
+			i++;
+		}
+	}
+}
+
+int		prs_wrld(t_data *data, int argc, char *argv[])
 {
 	int		fd;
 	int		i;
@@ -84,11 +132,11 @@ int		prs_wrld(t_data *mapdata, int argc, char *argv[])
 	while (get_next_line(fd, &lineread))
 	{
 		if (lineread[i] == 'R')
-			i = get_res(lineread, mapdata, i);
+			i = get_res(lineread, data, i);
 		if (lineread[i] == 'F')
-			i = get_floor(lineread, mapdata, i);
+			i = get_floor(lineread, data, i);
 		if (lineread[i] == 'C')
-			i = get_ceiling(lineread, mapdata, i);
+			i = get_ceiling(lineread, data, i);
 		// if (lineread[i] == 'S')
 		// 	;
 		// if (lineread[i] == 'N' && lineread[i + 1] == 'O')
@@ -100,14 +148,16 @@ int		prs_wrld(t_data *mapdata, int argc, char *argv[])
 		// if (lineread[i] == 'W' && lineread[i + 1] == 'E')
 		// 	;
 		if (lineread[i] == '1')
-			get_map(lineread, mapdata);
+			get_map(lineread, data);
 		free(lineread);
 	}
-	mapdata->maparr = ft_split(mapdata->maptemp, '\n');
-	printf("Resolution is %d %d\n", mapdata->resx, mapdata->resy);
-	printf("Floor colour is %X\n", mapdata->floor.colour);
-	printf("Ceiling colour is %X\n", mapdata->ceiling.colour);
-	free(mapdata->maptemp);
-	printf("Let's try string number 1 of the array: %s\n", mapdata->maparr[0]);
+	data->maparr = ft_split(data->maptemp, '\n');
+	player(data);
+	free(data->maptemp);
 	return (0);
 }
+
+	// printf("Resolution is %d %d\n", data->resx, data->resy);
+	// printf("Floor colour is %X\n", data->floor.colour);
+	// printf("Ceiling colour is %X\n", data->ceiling.colour);
+	// printf("Let's try string number 1 of the array: %s\n", data->maparr[0]);
