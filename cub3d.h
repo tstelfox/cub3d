@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/17 12:34:21 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/17 18:11:26 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,27 @@ typedef struct		s_mlx
 	int				endian;
 }					t_mlx;
 
+typedef struct		s_ray
+{
+	int				mapx;
+	int				mapy;
+	double			camx;
+	double			raydirx;
+	double			raydiry;
+	double			sidedx;
+	double			sidedy;
+	double			deltadx;
+	double			deltady;
+	double			walldist;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+}					t_ray;
+
 typedef struct		s_data
 {
 	int				resx;
@@ -70,6 +91,7 @@ typedef struct		s_data
 	t_map			mapsize;
 	t_player		player;
 	t_mlx			mlx;
+	t_ray			ray;
 }					t_data;
 
 
