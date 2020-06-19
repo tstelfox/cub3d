@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/17 14:47:04 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/19 17:51:54 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,28 @@ int		get_map(char *lineread, t_data *data)
 
 void	east_dir(t_data *data)
 {
+	data->player.dirx = 1;
+	data->player.diry = 0;
+	data->player.planex = 0;
+	data->player.planey = 0.66;
+}
+
+void	north_dir(t_data *data)
+{
 	data->player.dirx = 0;
-	data->player.diry = -1;
+	data->player.diry = 1;
 	data->player.planey = 0;
 	data->player.planex = 0.66;
 }
 
 void	player_pos(t_data *data, int i, int k)
 {
-	data->player.posx = (double)k;
-	data->player.posy = (double)i ;
+	data->player.posx = (double)(k + 0.5);
+	data->player.posy = (double)(i + 0.5);
 	if (data->maparr[i][k] == 'E')
 		east_dir(data);
-	// if (data->maparr[i][k] == 'N')
-	// 	;
+	if (data->maparr[i][k] == 'N')
+		north_dir(data);
 	// if (data->maparr[i][k] == 'S')
 	// 	;
 	// if (data->maparr[i][k] == 'W')

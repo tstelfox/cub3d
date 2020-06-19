@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/17 18:24:42 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/19 14:37:13 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	data_init(t_data *data)
 	data->ceiling.t_rgb.a = 0;
 	data->player.posx = 0;
 	data->player.posy = 0;
+	data->player.planey = 0;
+	data->player.planex = 0;
+	data->ray.mapx = 0;
+	data->ray.mapy = 0;
 	data->ray.camx = 0;
 	data->ray.raydirx = 0;
 	data->ray.raydiry = 0;

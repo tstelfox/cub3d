@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/17 18:11:26 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/06/19 18:15:19 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct		s_mlx
 
 typedef struct		s_ray
 {
-	int				mapx;
-	int				mapy;
+	double			mapx;
+	double			mapy;
 	double			camx;
 	double			raydirx;
 	double			raydiry;

@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/06/17 18:34:22 by tmullan       ########   odam.nl          #
+#    Updated: 2020/06/19 14:51:28 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJ)
 	make -C $(GNL_DIR)
 	make -C $(LIBFT)
 	cp $(MLX_DIR)/libmlx.dylib .
-	$(CC) $^ -Llibft -lft -Lgnl -lgnl  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS)
+	$(CC) $^ -Llibft -lft -Lgnl -lgnl  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS) -g
 	
 %.o: %.c
 	$(CC) -Imlx -c $< -o $@
