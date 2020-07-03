@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/06/19 14:37:13 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/03 15:57:40 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void	data_init(t_data *data)
 	data->ray.lineheight = 0;
 	data->ray.drawstart = 0;
 	data->ray.drawend = 0;
+	data->ray.mspeed = 0.04;
+	data->ray.rotspeed = 0.02;
 	data->maptemp = NULL;
+	data->ray.frame = 1;
+	data->ray.key = 0;
 }
 
 void	zero_mlx(t_mlx *mlx)
@@ -66,26 +70,3 @@ int		main(int argc, char *argv[])
 	// raycast(&data);
 	return (0);
 }
-
-
-
-
-
-
-
-
-// {
-// 	char 	file[10000];
-// 	int		fd;
-	
-// 	if (argc == 1)
-// 	{
-// 		printf("Didnt attach a map file, dipshit\n");
-// 		return (1);
-// 	}
-// 	fd = open(argv[1],O_RDONLY);
-// 	printf("fd is :%d\n", fd);
-// 	read(fd, file, 10000);
-// 	prs_wrld(file);
-// 	return (0);
-// }
