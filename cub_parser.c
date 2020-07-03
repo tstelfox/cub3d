@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/01 19:48:39 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/03 18:50:36 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ int		get_map(char *lineread, t_data *data)
 	return (0);
 }
 
+void	west_dir(t_data *data)
+{
+	data->player.dirx = -1;
+	data->player.diry = 0;
+	data->player.planex = 0;
+	data->player.planey = 0.66;
+}
+
 void	east_dir(t_data *data)
 {
 	data->player.dirx = 1;
@@ -84,6 +92,14 @@ void	north_dir(t_data *data)
 	data->player.planex = 0.66;
 }
 
+void	south_dir(t_data *data)
+{
+	data->player.dirx = 0;
+	data->player.diry = 1;
+	data->player.planey = 0;
+	data->player.planex = -0.66;
+}
+
 void	player_pos(t_data *data, int i, int k)
 {
 	data->player.posx = (double)(k + 0.5);
@@ -92,10 +108,10 @@ void	player_pos(t_data *data, int i, int k)
 		east_dir(data);
 	if (data->maparr[i][k] == 'N')
 		north_dir(data);
-	// if (data->maparr[i][k] == 'S')
-	// 	;
-	// if (data->maparr[i][k] == 'W')
-	// 	;
+	if (data->maparr[i][k] == 'W')
+		west_dir(data);
+	if (data->maparr[i][k] == 'S')
+		south_dir(data);
 }
 
 void	player(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/03 16:22:24 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/03 19:26:21 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,43 @@ int			frame_update(t_data *data)
 {
 	if (data->ray.frame % 2 == 0)
 	{
-		printf("Should come in here immediately\n");
+		// printf("Should come in here immediately\n");
 		mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 			data->mlx.img, 0, 0);
 	}
 	else
 	{
-		printf("Should come in here on first keypress\n");
+		// printf("Should come in here on first keypress\n");
 		mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 			data->mlx.img2, 0, 0);
 	}
 	return (0);
 }
 
-void		movement(t_data *data)
+int			movement(t_data *data)
 {
 	if (data->ray.key == 1)
 	{
-		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
-		{
-			// printf("in here ever 1? Also key is %d\n", data->ray.key);
+		if (data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
 			data->player.posy += (data->player.diry * data->ray.mspeed);
-		}
-		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '1')
-		{
-			// printf("in here ever 2? Also key is %d\n", data->ray.key);
-			data->player.posy += (data->player.diry * data->ray.mspeed);
-		}
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1')
+			data->player.posx += (data->player.dirx * data->ray.mspeed);
 		// printf("so posx, y have changed to: %f %f\n", data->player.posx, data->player.posy);
 		// printf("frame should be two: %d\n", data->ray.frame);
+		// data->player.posx += (data->player.dirx * data->ray.mspeed);
+		// data->player.posy += (data->player.diry * data->ray.mspeed);
+		raycaster(data);
+	} //WHY DOESN'T == '0' WORK!?!?
+	if (data->ray.key == 2)
+	{
+		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
+			data->player.posy -= (data->player.diry * data->ray.mspeed);
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '1')
+			data->player.posx -= (data->player.dirx * data->ray.mspeed);
 		raycaster(data);
 	}
+	data->ray.key = 0;
+	return (0);
 }
 
 int			keypressed(int keycode, t_data *data)
@@ -66,21 +72,17 @@ int			keypressed(int keycode, t_data *data)
 	{
 		data->ray.key = 1;
 		printf("AVANTI TUTTA DIOCANEEE\n");
-		// if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] == 0)
-		// {
-		// 	data->player.posy += (data->player.diry * data->ray.mspeed);
-		// 	printf("in here ever?\n");
-		// }
-		// if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] == 0)
-		// {
-		// 	data->player.posy += (data->player.diry * data->ray.mspeed);
-		// }
+	}
+	if (keycode == 1)
+	{
+		data->ray.key = 2;
+		printf("FAI RETROMARCIA CE STANNO E GUARDIE\n");
 	}
 	movement(data);
 	return (0);
 }
 
-void		raycaster(t_data *data)
+int			raycaster(t_data *data)
 {
 	int x;
 
@@ -174,13 +176,13 @@ void		raycaster(t_data *data)
 		// printf("Walldist = [%f] || mapx,y [%d][%d] || stepx,y [%d][%d] || raydirx,y [%f][%f] || posx, y [%f][%f]\nDeltadx, y = [%f][%f] || sidedx, y [%f][%f]\n", data->ray.walldist,
 		// 		data->ray.mapx, data->ray.mapy, data->ray.stepx, data->ray.stepy, data->ray.raydirx, data->ray.raydiry, data->player.posx, data->player.posy, data->ray.deltadx, data->ray.deltady, data->ray.sidedx, data->ray.sidedy);
 	}
+	frame_update(data);
 	data->ray.frame++;
-
+	return (0);
 }
 
 void		mlx_start(t_data *data)
 {
-	// int x = 10;
 	data->mlx.mlx = mlx_init();
 	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, data->resx,
 			data->resy, "mumyer");
@@ -194,20 +196,7 @@ void		mlx_start(t_data *data)
 			&data->mlx.linelen, &data->mlx.endian);
 
 	raycaster(data);
-	// while (x < 1000)
-	// {
-	// 	my_mlx_pixel_put(data, 10, x, data->ceiling.colour);
-	// 	x++;
-	// }
 	mlx_key_hook(data->mlx.mlx_win, keypressed, data);
-	mlx_loop_hook(data->mlx.mlx, frame_update, data);
+	mlx_loop_hook(data->mlx.mlx, raycaster, data);
 	mlx_loop(data->mlx.mlx);
 }
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/03 15:57:16 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/03 17:31:48 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ int					get_next_line(int fd, char **line);
 char				*ft_strjoinnl(char const *s1, char const *s2);
 void				mlx_start(t_data *data);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int colour);
-void				raycaster(t_data *data);
+int					raycaster(t_data *data);
 #endif
