@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/08 16:25:40 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/08 17:09:00 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,22 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 {
 	char	*dst;
 
-	// if (data->ray.frame % 2 == 0)
-	// 	dst = data->mlx.addr2 + (y * data->mlx.linelen + x * (data->mlx.bpp / 8));
-	// else
 	dst = data->mlx.addr + (y * data->mlx.linelen + x * (data->mlx.bpp / 8));
 	*(unsigned int*)dst = colour;
 }
 
 int			frame_update(t_data *data)
 {
-	// if (data->ray.frame % 2 == 0)
-	// {
-		// printf("Should come in here immediately\n");
 	mlx_sync(1, data->mlx.img);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 		data->mlx.img, 0, 0);
 	mlx_sync(3, data->mlx.mlx_win);
-	// }
-	// else
-	// {
-	// 	// printf("Should come in here on first keypress\n");
-	// 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
-	// 		data->mlx.img2, 0, 0);
-	// }
 	return (0);
 }
 
 void		rotate(t_data *data)
 { // This shit is just tripping balls
-	if (data->ray.key == 5)
+	if (data->ray.key[4] == 1)
 	{
 		double oldirx = data->player.dirx;
 		data->player.dirx = data->player.dirx * cos(-data->ray.rotspeed) - data->player.diry * sin(-data->ray.rotspeed);
@@ -53,7 +40,7 @@ void		rotate(t_data *data)
 		data->player.planex = data->player.planex * cos(-data->ray.rotspeed) - data->player.planey * sin(-data->ray.rotspeed);
 		data->player.planey = oldplanex * sin(-data->ray.rotspeed) + data->player.planey * cos(-data->ray.rotspeed);
 	}
-	if (data->ray.key == 6) //Left-rotate
+	if (data->ray.key[5] == 1) //Left-rotate
 	{
 		double oldirx = data->player.dirx;
 		data->player.dirx = data->player.dirx * cos(data->ray.rotspeed) - data->player.diry * sin(data->ray.rotspeed);
@@ -62,46 +49,47 @@ void		rotate(t_data *data)
 		data->player.planex = data->player.planex * cos(data->ray.rotspeed) - data->player.planey * sin(data->ray.rotspeed);
 		data->player.planey = oldplanex * sin(data->ray.rotspeed) + data->player.planey * cos(data->ray.rotspeed);
 	}
-	raycaster(data);
+	// raycaster(data);
 }
 
 int			movement(t_data *data)
 {
-	if (data->ray.key == 1)
+	if (data->ray.key[0] == 1)
 	{
 		if (data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
 			data->player.posy += (data->player.diry * data->ray.mspeed);
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1')
 			data->player.posx += (data->player.dirx * data->ray.mspeed);
-		raycaster(data);
+		// raycaster(data);
 	} //WHY DOESN'T == '0' WORK!?!? will printf this later
-	if (data->ray.key == 2)
+	if (data->ray.key[1] == 1)
 	{
 		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
 			data->player.posy -= (data->player.diry * data->ray.mspeed);
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '1')
 			data->player.posx -= (data->player.dirx * data->ray.mspeed);
-		raycaster(data);
+		// raycaster(data);
 	}
-	if (data->ray.key == 3)
+	if (data->ray.key[2] == 1)
 	{
 		if (data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
 			data->player.posy -= (data->player.planey * data->ray.mspeed);
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] != '1')
 			data->player.posx -= (data->player.planex * data->ray.mspeed);
-		raycaster(data);
+		// raycaster(data);
 	}
-	if (data->ray.key == 4)
+	if (data->ray.key[3] == 1)
 	{
 		if (data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
 			data->player.posy += (data->player.planey * data->ray.mspeed);
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] != '1')
 			data->player.posx += (data->player.planex * data->ray.mspeed);
-		raycaster(data);
+		// raycaster(data);
 	}
-	if (data->ray.key == 5 || data->ray.key == 6)
+	if (data->ray.key[4] == 1 || data->ray.key[5] == 1)
 		rotate(data);
-	data->ray.key = 0;
+	// raycaster(data);
+	// data->ray.key = 0; Lifting the key should be enough
 	return (0);
 }
 
@@ -109,32 +97,49 @@ int			keypressed(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		data->ray.key = 1;
+		data->ray.key[0] = 1;
 		printf("AVANTI TUTTA DIOCANEEE\n");
 	}
 	if (keycode == 1)
 	{
-		data->ray.key = 2;
+		data->ray.key[1] = 1;
 		printf("FAI RETROMARCIA CE STANNO E GUARDIE\n");
 	}
 	if (keycode == 0)
 	{
-		data->ray.key = 3;
+		data->ray.key[2] = 1;
 		printf("RIPARTIAMO DALLA SINISTRA\n");
 	}
 	if (keycode == 2)
 	{
-		data->ray.key = 4;
+		data->ray.key[3] = 1;
 		printf("SE TU DALL'ALTOPIANO GUARDI IL MARE\n");
 	}
 	if (keycode == 123)
 	{
-		data->ray.key = 5;
+		data->ray.key[4] = 1;
 		printf("GIRA LA ROTA BIMBO\n");
 	}
 	if (keycode == 124)
-		data->ray.key = 6;
+		data->ray.key[5] = 1;
 	movement(data);
+	return (0);
+}
+
+int			keyreleased(int keycode, t_data *data)
+{
+	if (keycode == 13)
+		data->ray.key[0] = 0;
+	if (keycode == 1)
+		data->ray.key[1] = 0;
+	if (keycode == 0)
+		data->ray.key[2] = 0;
+	if (keycode == 2)
+		data->ray.key[3] = 0;
+	if (keycode == 123)
+		data->ray.key[4] = 0;
+	if (keycode == 124)
+		data->ray.key[5] = 0;
 	return (0);
 }
 
@@ -256,15 +261,13 @@ void		mlx_start(t_data *data)
 			data->resy, "mumyer");
 
 	data->mlx.img = mlx_new_image(data->mlx.mlx, data->resx, data->resy);
-	// data->mlx.img2 = mlx_new_image(data->mlx.mlx, data->resx, data->resy);
 
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bpp,
 			&data->mlx.linelen, &data->mlx.endian);
-	// data->mlx.addr2 = mlx_get_data_addr(data->mlx.img2, &data->mlx.bpp,
-	// 		&data->mlx.linelen, &data->mlx.endian);
 
 	raycaster(data);
-	mlx_key_hook(data->mlx.mlx_win, keypressed, data);
+	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
+	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
 	mlx_loop_hook(data->mlx.mlx, raycaster, data);
 	mlx_loop(data->mlx.mlx);
 }
