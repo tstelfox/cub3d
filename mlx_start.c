@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/03 19:26:21 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/08 15:14:23 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,29 @@ int			frame_update(t_data *data)
 	return (0);
 }
 
+void		rotate(t_data *data)
+{ // This shit is just tripping balls
+	if (data->ray.key == 5)
+	{
+		double oldirx = data->player.dirx;
+		data->player.dirx = data->player.dirx * cos(-data->ray.rotspeed) - data->player.diry * sin(-data->ray.rotspeed);
+		data->player.diry = oldirx * sin(-data->ray.rotspeed) + data->player.diry * cos(-data->ray.rotspeed);
+		double oldplanex = data->player.planex;
+		data->player.planex = data->player.planex * cos(-data->ray.rotspeed) - data->player.planey * sin(-data->ray.rotspeed);
+		data->player.planey = oldplanex * sin(-data->ray.rotspeed) + data->player.planey * cos(-data->ray.rotspeed);
+	}
+	if (data->ray.key == 6) //Left-rotate
+	{
+		double oldirx = data->player.dirx;
+		data->player.dirx = data->player.dirx * cos(data->ray.rotspeed) - data->player.diry * sin(data->ray.rotspeed);
+		data->player.diry = oldirx * sin(data->ray.rotspeed) + data->player.diry * cos(data->ray.rotspeed);
+		double oldplanex = data->player.planex;
+		data->player.planex = data->player.planex * cos(data->ray.rotspeed) - data->player.planey * sin(data->ray.rotspeed);
+		data->player.planey = oldplanex * sin(data->ray.rotspeed) + data->player.planey * cos(data->ray.rotspeed);
+	}
+	raycaster(data);
+}
+
 int			movement(t_data *data)
 {
 	if (data->ray.key == 1)
@@ -48,12 +71,8 @@ int			movement(t_data *data)
 			data->player.posy += (data->player.diry * data->ray.mspeed);
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1')
 			data->player.posx += (data->player.dirx * data->ray.mspeed);
-		// printf("so posx, y have changed to: %f %f\n", data->player.posx, data->player.posy);
-		// printf("frame should be two: %d\n", data->ray.frame);
-		// data->player.posx += (data->player.dirx * data->ray.mspeed);
-		// data->player.posy += (data->player.diry * data->ray.mspeed);
 		raycaster(data);
-	} //WHY DOESN'T == '0' WORK!?!?
+	} //WHY DOESN'T == '0' WORK!?!? will printf this later
 	if (data->ray.key == 2)
 	{
 		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
@@ -62,6 +81,24 @@ int			movement(t_data *data)
 			data->player.posx -= (data->player.dirx * data->ray.mspeed);
 		raycaster(data);
 	}
+	if (data->ray.key == 3)
+	{
+		if (data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
+			data->player.posy -= (data->player.planey * data->ray.mspeed);
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] != '1')
+			data->player.posx -= (data->player.planex * data->ray.mspeed);
+		raycaster(data);
+	}
+	if (data->ray.key == 4)
+	{
+		if (data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
+			data->player.posy += (data->player.planey * data->ray.mspeed);
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] != '1')
+			data->player.posx += (data->player.planex * data->ray.mspeed);
+		raycaster(data);
+	}
+	if (data->ray.key == 5 || data->ray.key == 6)
+		rotate(data);
 	data->ray.key = 0;
 	return (0);
 }
@@ -78,6 +115,23 @@ int			keypressed(int keycode, t_data *data)
 		data->ray.key = 2;
 		printf("FAI RETROMARCIA CE STANNO E GUARDIE\n");
 	}
+	if (keycode == 0)
+	{
+		data->ray.key = 3;
+		printf("RIPARTIAMO DALLA SINISTRA\n");
+	}
+	if (keycode == 2)
+	{
+		data->ray.key = 4;
+		printf("SE TU DALL'ALTOPIANO GUARDI IL MARE\n");
+	}
+	if (keycode == 123)
+	{
+		data->ray.key = 5;
+		printf("GIRA LA ROTA BIMBO\n");
+	}
+	if (keycode == 124)
+		data->ray.key = 6;
 	movement(data);
 	return (0);
 }
@@ -160,15 +214,27 @@ int			raycaster(t_data *data)
 			data->ray.drawstart = 0;
 		data->ray.drawend = data->ray.lineheight / 2 + data->resy / 2;
 		if (data->ray.drawend >= data->resy)
-			data->ray.drawend = data->resy - 1;
+			data->ray.drawend = data->resy;
+		// data->ray.drawend = data->resy - 1; Check later if not using this causes issues
 		//ACtually drawing
-		unsigned int colour = 0xFF0000;
+		unsigned int colour = 0x0000FF;
 		if (data->ray.side == 1)
 			colour = 0xFFFFFF;
+		int i = 0;
+		while (i < data->ray.drawstart)
+		{
+			my_mlx_pixel_put(data, x, i, data->ceiling.colour);
+			i++;
+		}
 		while (data->ray.drawstart <= data->ray.drawend)
 		{
 			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);
 			data->ray.drawstart++;
+		}
+		while (data->ray.drawend < data->resy)
+		{
+			my_mlx_pixel_put(data, x, data->ray.drawend, data->floor.colour);
+			data->ray.drawend++;
 		}
 		x++;
 		// mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,

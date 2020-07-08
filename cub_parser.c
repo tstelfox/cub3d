@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/03 18:50:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/08 13:34:44 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	west_dir(t_data *data)
 	data->player.dirx = -1;
 	data->player.diry = 0;
 	data->player.planex = 0;
-	data->player.planey = 0.66;
+	data->player.planey = -0.66;
 }
 
 void	east_dir(t_data *data)
