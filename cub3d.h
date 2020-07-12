@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 19:33:04 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 20:13:37 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct		s_ray
 	double			mspeed;
 	double			rotspeed;
 	int				key[6];
-	int				frame;
 }					t_ray;
 
 typedef struct		s_data

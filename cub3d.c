@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/08 16:33:56 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 20:12:34 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	data_init(t_data *data)
 	data->ray.mspeed = 0.1;
 	data->ray.rotspeed = 0.1;
 	data->maptemp = NULL;
-	data->ray.frame = 1;
 	int i = 0;
 	while (i < 6)
 	{

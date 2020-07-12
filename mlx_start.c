@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 19:33:58 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 20:19:49 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			movement(t_data *data)
 		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1')
 			data->player.posx += (data->player.dirx * data->ray.mspeed);
 		// raycaster(data);
-	} //WHY DOESN'T == '0' WORK!?!? will printf this later
+	}
 	if (data->ray.key[1] == 1)
 	{
 		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
@@ -89,7 +89,6 @@ int			movement(t_data *data)
 	if (data->ray.key[4] == 1 || data->ray.key[5] == 1)
 		rotate(data);
 	// raycaster(data);
-	// data->ray.key = 0; Lifting the key should be enough
 	return (0);
 }
 

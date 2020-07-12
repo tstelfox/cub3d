@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 19:32:15 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 20:42:56 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int			raycaster(t_data *data)
 			data->ray.drawstart = 0;
 		data->ray.drawend = data->ray.lineheight / 2 + data->resy / 2;
 		if (data->ray.drawend >= data->resy)
-			data->ray.drawend = data->resy;
+			data->ray.drawend = data->resy - 1; // Taking out that 1 really fucks shit up
 		// data->ray.drawend = data->resy - 1; Check later if not using this causes issues
 		//ACtually drawing
 		unsigned int colour = 0x0000FF;
@@ -107,10 +107,11 @@ int			raycaster(t_data *data)
 			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);
 			data->ray.drawstart++;
 		}
-		while (data->ray.drawend < data->resy)
+		i = data->ray.drawstart;
+		while (i < data->resy)
 		{
-			my_mlx_pixel_put(data, x, data->ray.drawend, data->floor.colour);
-			data->ray.drawend++;
+			my_mlx_pixel_put(data, x, i, data->floor.colour);
+			i++;
 		}
 		x++;
 		// mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
@@ -120,7 +121,5 @@ int			raycaster(t_data *data)
 	}
 	movement(data);
 	frame_update(data);
-	data->ray.frame++;
-	printf("is w it set to 0? %d\n", data->ray.key[0]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/11 18:24:35 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 20:28:23 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 	return (0);
 }
 
+	// printf("Let's try string number 1 of the array: %s\n", data->maparr[3]);
 	// printf("Resolution is %d %d\n", data->resx, data->resy);
 	// printf("Floor colour is %X\n", data->floor.colour);
 	// printf("Ceiling colour is %X\n", data->ceiling.colour);
-	// printf("Let's try string number 1 of the array: %s\n", data->maparr[0]);
