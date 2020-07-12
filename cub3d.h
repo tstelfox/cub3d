@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/08 16:33:13 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/12 19:33:04 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct		s_map
 {
 	int				width;
 	int				height;
+	char			*tex[4];
 }					t_map;
 
 typedef	struct		s_player
@@ -53,9 +54,7 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*mlx_win;
 	void			*img;
-	void			*img2;
 	char			*addr;
-	char			*addr2;
 	int				bpp;
 	int				linelen;
 	int				endian;
@@ -94,7 +93,7 @@ typedef struct		s_data
 	char			**maparr;
 	t_colour		floor;
 	t_colour		ceiling;
-	t_map			mapsize;
+	t_map			map; //mapsize
 	t_player		player;
 	t_mlx			mlx;
 	t_ray			ray;
@@ -108,4 +107,6 @@ char				*ft_strjoinnl(char const *s1, char const *s2);
 void				mlx_start(t_data *data);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int colour);
 int					raycaster(t_data *data);
+int					frame_update(t_data *data);
+int					movement(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/08 13:34:44 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/11 18:24:35 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ int		get_ceiling(char *lineread, t_data *data, int i)
 	while (!ft_isdigit(lineread[i]))
 		i++;
 	data->ceiling.t_rgb.b = ft_atoi(&lineread[i]);
+	return (0);
+}
+
+int		get_n_texture(char *lineread, t_data *data, int i)
+{
+	while (lineread[i] != '.')
+		i++;
+	data->map.tex[0] = ft_strdup(&lineread[i]);
 	return (0);
 }
 
@@ -140,6 +148,7 @@ void	player(t_data *data)
 	}
 }
 
+
 int		prs_wrld(t_data *data, int argc, char *argv[])
 {
 	int		fd;
@@ -161,9 +170,9 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 			i = get_floor(lineread, data, i);
 		if (lineread[i] == 'C')
 			i = get_ceiling(lineread, data, i);
+		if (lineread[i] == 'N' && lineread[i + 1] == 'O')
+			i = get_n_texture(lineread, data, i);
 		// if (lineread[i] == 'S')
-		// 	;
-		// if (lineread[i] == 'N' && lineread[i + 1] == 'O')
 		// 	;
 		// if (lineread[i] == 'E' && lineread[i + 1] == 'A')
 		// 	;
