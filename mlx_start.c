@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 14:44:38 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 18:32:24 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 
 	dst = data->mlx.addr + (y * data->mlx.linelen + x * (data->mlx.bpp / 8));
 	*(unsigned int*)dst = colour;
+}
+
+unsigned int	colour_getter(t_data *data, int x, int y)
+{
+	char	*dst;
+	
+	dst = data->walls[0].img + (y * data->walls[0].linelen + x * (data->walls[0].bpp /8));
+	return(*(unsigned int*)dst);
 }
 
 int			frame_update(t_data *data)

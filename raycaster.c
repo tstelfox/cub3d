@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 20:42:56 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 19:07:46 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			raycaster(t_data *data)
 	int x;
 
 	x = 0;
+
 	while (x < data->resx)
 	{
 		// Ray position and direction
@@ -93,9 +94,32 @@ int			raycaster(t_data *data)
 			data->ray.drawend = data->resy - 1; // Taking out that 1 really fucks shit up
 		// data->ray.drawend = data->resy - 1; Check later if not using this causes issues
 		//ACtually drawing
-		unsigned int colour = 0x0000FF;
-		if (data->ray.side == 1)
-			colour = 0xFFFFFF;
+
+		int texnum = data->maparr[data->ray.mapy][data->ray.mapx] - 1; //Careful with char vs int here
+		// printf("texnum be %d\n", texnum);
+		// Calculate value of Wallx
+		double wallx;
+		if (data->ray.side == 0)
+			wallx = data->player.posy + data->ray.walldist * data->ray.raydiry;
+		else
+			wallx = data->player.posx + data->ray.walldist * data->ray.raydirx;
+		wallx -= floor(wallx);
+
+		//x coordinate on the texture
+		int textx = (int)(wallx * (double)(data->walls[0].width));
+		if (data->ray.side == 0 && data->ray.raydirx > 0)
+			textx = data->walls[0].width - textx - 1;
+		if (data->ray.side == 1 && data->ray.raydiry < 0)
+			textx = data->walls[0].width - textx - 1;
+
+		double step = 1.0 * data->walls[0].height / data->ray.lineheight;
+
+		double texpos = (data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step;
+		
+		// unsigned int colour = 0x0000FF;
+		// if (data->ray.side == 1)
+		// 	colour = 0xFFFFFF;
+		unsigned int colour;
 		int i = 0;
 		while (i < data->ray.drawstart)
 		{
@@ -104,7 +128,12 @@ int			raycaster(t_data *data)
 		}
 		while (data->ray.drawstart <= data->ray.drawend)
 		{
+			int texy = (int)texpos & (data->walls[0].height - 1);
+			colour = colour_getter(data, textx , texpos);
+			// printf("The colour should change: %X\n", colour);
+			// printf("What is textx doing then :%d\n", textx);
 			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);
+			texpos += step;
 			data->ray.drawstart++;
 		}
 		i = data->ray.drawstart;
@@ -114,6 +143,8 @@ int			raycaster(t_data *data)
 			i++;
 		}
 		x++;
+
+
 		// mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 		// 	data->mlx.img, 0, 0);
 		// printf("Walldist = [%f] || mapx,y [%d][%d] || stepx,y [%d][%d] || raydirx,y [%f][%f] || posx, y [%f][%f]\nDeltadx, y = [%f][%f] || sidedx, y [%f][%f]\n", data->ray.walldist,

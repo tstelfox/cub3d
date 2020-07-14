@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 14:24:37 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 17:53:47 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ typedef struct		s_mlx
 
 typedef struct		s_xpm
 {
+	void			*img;
 	int				height;
 	int				width;
-	void			*img;
+	int				bpp;
+	int				linelen;
+	int				endian;
 }					t_xpm;
 
 
@@ -114,6 +117,7 @@ int					get_next_line(int fd, char **line);
 char				*ft_strjoinnl(char const *s1, char const *s2);
 void				mlx_start(t_data *data);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int colour);
+unsigned int		colour_getter(t_data *data, int x, int y);
 int					raycaster(t_data *data);
 int					frame_update(t_data *data);
 int					movement(t_data *data);
