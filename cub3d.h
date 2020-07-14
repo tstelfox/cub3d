@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 20:13:37 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 14:24:37 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef	struct		s_map
 {
 	int				width;
 	int				height;
-	char			*tex[4];
 }					t_map;
 
 typedef	struct		s_player
@@ -59,6 +58,14 @@ typedef struct		s_mlx
 	int				linelen;
 	int				endian;
 }					t_mlx;
+
+typedef struct		s_xpm
+{
+	int				height;
+	int				width;
+	void			*img;
+}					t_xpm;
+
 
 typedef struct		s_ray
 {
@@ -96,6 +103,8 @@ typedef struct		s_data
 	t_player		player;
 	t_mlx			mlx;
 	t_ray			ray;
+	t_xpm			walls[4];
+	char			*tex[4];
 }					t_data;
 
 

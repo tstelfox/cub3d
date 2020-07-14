@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 20:19:49 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 14:44:38 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,22 @@ int			keyreleased(int keycode, t_data *data)
 	return (0);
 }
 
+void		get_texture(t_data *data)
+{
+	int		img_width;
+	int		img_height;
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->walls[i].img = mlx_xpm_file_to_image(data->mlx.mlx, data->tex[i], &img_width, &img_height);
+		data->walls[i].height = img_height;
+		data->walls[i].width = img_width;
+		i++;
+	}
+}
+
 void		mlx_start(t_data *data)
 {
 	int		img_width;
@@ -154,12 +170,13 @@ void		mlx_start(t_data *data)
 
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bpp,
 			&data->mlx.linelen, &data->mlx.endian);
+	get_texture(data);
 
+	// printf("Img height and width do be: %d %d\n", data->walls[0].height, data->walls[0].width);
 	raycaster(data);
 	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
 	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
 	mlx_loop_hook(data->mlx.mlx, raycaster, data);
-	// data->mlx.img = mlx_xpm_file_to_image(data->mlx.mlx, data->map.tex[0], &img_width, &img_height);
 	// mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 	// 	data->mlx.img, 0, 0);
 	mlx_loop(data->mlx.mlx);
