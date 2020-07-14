@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/12 20:28:23 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 14:27:03 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		get_n_texture(char *lineread, t_data *data, int i)
 {
 	while (lineread[i] != '.')
 		i++;
-	data->map.tex[0] = ft_strdup(&lineread[i]);
+	data->tex[0] = ft_strdup(&lineread[i]);
 	return (0);
 }
 
