@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 19:07:46 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/14 21:03:22 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int			raycaster(t_data *data)
 
 		double step = 1.0 * data->walls[0].height / data->ray.lineheight;
 
-		double texpos = (data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step;
+		double texpos = ((data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step - step);
 		
 		// unsigned int colour = 0x0000FF;
 		// if (data->ray.side == 1)
@@ -128,7 +128,11 @@ int			raycaster(t_data *data)
 		}
 		while (data->ray.drawstart <= data->ray.drawend)
 		{
-			int texy = (int)texpos & (data->walls[0].height - 1);
+			// if (texpos <= 0)
+			// 	texpos = 0;
+			// else
+			// 	texpos = texpos;	
+			// int texy = (int)texpos & (data->walls[0].height - 1);
 			colour = colour_getter(data, textx , texpos);
 			// printf("The colour should change: %X\n", colour);
 			// printf("What is textx doing then :%d\n", textx);
