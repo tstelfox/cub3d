@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 21:03:22 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 12:49:52 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,24 @@ int			raycaster(t_data *data)
 				data->ray.hit = 1;
 		}
 		//Calculate distance projected on camera direction
+		int compass;
 		if (data->ray.side == 0)
+		{
 			data->ray.walldist = (data->ray.mapx - data->player.posx + (1. - data->ray.stepx) / 2.) / data->ray.raydirx;
+			if (data->ray.mapx > data->player.posx)
+				compass = 3;
+			else
+				compass = 1;
+		}
 		else
+		{
 			data->ray.walldist = (data->ray.mapy - data->player.posy + (1. - data->ray.stepy) / 2.) / data->ray.raydiry;
+			if (data->ray.mapy > data->player.posy)
+				compass = 0;
+			else
+				compass = 2;
+			
+		}
 		//Calculate height of line to draw
 		data->ray.lineheight = (int)(data->resy / data->ray.walldist);
 		//Calculate lowest and highest pixel
@@ -133,7 +147,7 @@ int			raycaster(t_data *data)
 			// else
 			// 	texpos = texpos;	
 			// int texy = (int)texpos & (data->walls[0].height - 1);
-			colour = colour_getter(data, textx , texpos);
+			colour = colour_getter(data, textx , texpos, compass);
 			// printf("The colour should change: %X\n", colour);
 			// printf("What is textx doing then :%d\n", textx);
 			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);

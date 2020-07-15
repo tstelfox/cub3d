@@ -1,12 +1,12 @@
-R 1080 690
+R 1920 1080
 NO ./texts/smooth.xpm
-EA
-SO
-WE
+EA ./texts/bricks.xpm
+SO ./texts/rock.xpm
+WE ./texts/relief.xpm
 
 S
-F 233, 0, 254
-C 255, 0, 1
+F 138, 108, 13
+C 138, 108, 13
 
 1111111111111111
 1101111110000001

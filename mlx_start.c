@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 20:40:15 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 12:20:20 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 	*(unsigned int*)dst = colour;
 }
 
-unsigned int	colour_getter(t_data *data, int x, int y)
+unsigned int	colour_getter(t_data *data, int x, int y, int compass)
 {
 	char	*dst;
 
-	dst = data->tex[0] + (y * data->walls[0].linelen + (x * (data->walls[0].bpp /8)));
+	dst = data->tex[compass] + (y * data->walls[compass].linelen + (x * (data->walls[compass].bpp /8)));
 	return(*(unsigned int*)dst);
 }
 
@@ -150,7 +150,7 @@ int			keyreleased(int keycode, t_data *data)
 	return (0);
 }
 
-void		get_texture(t_data *data)
+void		init_texture(t_data *data)
 {
 	int		img_width;
 	int		img_height;
@@ -162,10 +162,10 @@ void		get_texture(t_data *data)
 		data->walls[i].img = mlx_xpm_file_to_image(data->mlx.mlx, data->tex[i], &img_width, &img_height);
 		data->walls[i].height = img_height;
 		data->walls[i].width = img_width;
+		data->tex[i] = mlx_get_data_addr(data->walls[i].img, &data->walls[i].bpp,
+				&data->walls[i].linelen, &data->walls[i].endian);
 		i++;
 	}
-	data->tex[0] = mlx_get_data_addr(data->walls[0].img, &data->walls[0].bpp,
-			&data->walls[0].linelen, &data->walls[0].endian);
 }
 
 void		mlx_start(t_data *data)
@@ -180,7 +180,7 @@ void		mlx_start(t_data *data)
 
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bpp,
 			&data->mlx.linelen, &data->mlx.endian);
-	get_texture(data);
+	init_texture(data);
 
 	// printf("Img height and width do be: %d %d\n", data->walls[0].height, data->walls[0].width);
 	raycaster(data);

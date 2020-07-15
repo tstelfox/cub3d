@@ -1,8 +1,8 @@
 R 1090 690
 NO ./texts/smooth.xpm
-EA
-SO
-WE
+EA ./texts/bricks.xpm
+SO ./texts/rock.xpm
+WE ./texts/relief.xpm
 
 S
 F 133, 255, 45

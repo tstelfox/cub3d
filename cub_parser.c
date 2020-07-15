@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/14 14:27:03 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 12:14:32 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int		get_ceiling(char *lineread, t_data *data, int i)
 	return (0);
 }
 
-int		get_n_texture(char *lineread, t_data *data, int i)
+int		get_texture(char *lineread, t_data *data, int i, int side)
 {
 	while (lineread[i] != '.')
 		i++;
-	data->tex[0] = ft_strdup(&lineread[i]);
+	data->tex[side] = ft_strdup(&lineread[i]);
 	return (0);
 }
 
@@ -171,14 +171,14 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 		if (lineread[i] == 'C')
 			i = get_ceiling(lineread, data, i);
 		if (lineread[i] == 'N' && lineread[i + 1] == 'O')
-			i = get_n_texture(lineread, data, i);
+			i = get_texture(lineread, data, i, 0);
+		if (lineread[i] == 'E' && lineread[i + 1] == 'A')
+			i = get_texture(lineread, data, i, 1);
+		if (lineread[i] == 'S' && lineread[i + 1] == 'O')
+			i = get_texture(lineread, data, i, 2);
+		if (lineread[i] == 'W' && lineread[i + 1] == 'E')
+			i = get_texture(lineread, data, i, 3);
 		// if (lineread[i] == 'S')
-		// 	;
-		// if (lineread[i] == 'E' && lineread[i + 1] == 'A')
-		// 	;
-		// if (lineread[i] == 'S' && lineread[i + 1] == 'O')
-		// 	;
-		// if (lineread[i] == 'W' && lineread[i + 1] == 'E')
 		// 	;
 		if (lineread[i] == '1')
 			get_map(lineread, data);
