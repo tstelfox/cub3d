@@ -4,7 +4,7 @@ EA ./texts/bricks.xpm
 SO ./texts/rock.xpm
 WE ./texts/relief.xpm
 
-S
+S ./texts/pharaoh.xpm
 F 138, 108, 13
 C 138, 108, 13
 

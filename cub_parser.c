@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 12:14:32 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 18:31:42 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ int		get_ceiling(char *lineread, t_data *data, int i)
 	while (!ft_isdigit(lineread[i]))
 		i++;
 	data->ceiling.t_rgb.b = ft_atoi(&lineread[i]);
+	return (0);
+}
+
+int		get_sprite(char *lineread, t_data *data, int i)
+{
+	while (lineread[i] != '.')
+		i++;
+	data->sprite.addr = ft_strdup(&lineread[i]);
 	return (0);
 }
 
@@ -131,11 +139,8 @@ void	player(t_data *data)
 	k = 0;
 	while (data->maparr[i][k])
 	{
-		// printf("The full line is: %s\n", data->maparr[i]);
 		if (ft_isalpha(data->maparr[i][k]))
 		{
-			// printf("x and y are : %d %d\n", k, i);
-			// printf("The element is: %c\n", data->maparr[i][k]);
 			player_pos(data, i, k);
 			break ;
 		}
@@ -147,7 +152,6 @@ void	player(t_data *data)
 		}
 	}
 }
-
 
 int		prs_wrld(t_data *data, int argc, char *argv[])
 {
@@ -178,19 +182,17 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 			i = get_texture(lineread, data, i, 2);
 		if (lineread[i] == 'W' && lineread[i + 1] == 'E')
 			i = get_texture(lineread, data, i, 3);
-		// if (lineread[i] == 'S')
-		// 	;
+		if (lineread[i] == 'S' && lineread[i + 1] != 'O')
+			i = get_sprite(lineread, data, i);
 		if (lineread[i] == '1')
 			get_map(lineread, data);
 		free(lineread);
 	}
 	data->maparr = ft_split(data->maptemp, '\n');
+	count_sprites(data);
+	printf("Number of sprites do be: %d\n", data->spritenum);
 	player(data);
+	// store_sprite(data);
 	free(data->maptemp);
 	return (0);
 }
-
-	// printf("Let's try string number 1 of the array: %s\n", data->maparr[3]);
-	// printf("Resolution is %d %d\n", data->resx, data->resy);
-	// printf("Floor colour is %X\n", data->floor.colour);
-	// printf("Ceiling colour is %X\n", data->ceiling.colour);

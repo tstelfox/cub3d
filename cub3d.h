@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 12:20:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 18:30:58 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ typedef struct		s_xpm
 	int				endian;
 }					t_xpm;
 
+typedef struct		s_thijs
+{
+	char			*addr;
+	double			x;
+	double			y;
+}					t_thijs;
+
 
 typedef struct		s_ray
 {
@@ -98,18 +105,20 @@ typedef struct		s_data
 {
 	int				resx;
 	int				resy;
+	int				spritenum;
 	char			*maptemp;
 	char			**maparr;
 	t_colour		floor;
 	t_colour		ceiling;
-	t_map			map; //mapsize
+	t_map			map;
 	t_player		player;
 	t_mlx			mlx;
 	t_ray			ray;
 	t_xpm			walls[4];
 	char			*tex[4];
+	t_xpm			spt;
+	t_thijs			sprite;
 }					t_data;
-
 
 int					prs_wrld(t_data *data, int argc, char *argv[]);
 void				data_init(t_data *data);
@@ -121,4 +130,5 @@ unsigned int		colour_getter(t_data *data, int x, int y, int compass);
 int					raycaster(t_data *data);
 int					frame_update(t_data *data);
 int					movement(t_data *data);
+void				count_sprites(t_data *data);
 #endif

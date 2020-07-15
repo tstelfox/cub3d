@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 12:49:52 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 17:58:24 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			raycaster(t_data *data)
 		// data->ray.drawend = data->resy - 1; Check later if not using this causes issues
 		//ACtually drawing
 
-		int texnum = data->maparr[data->ray.mapy][data->ray.mapx] - 1; //Careful with char vs int here
+		// int texnum = data->maparr[data->ray.mapy][data->ray.mapx] - 1; //Careful with char vs int here
 		// printf("texnum be %d\n", texnum);
 		// Calculate value of Wallx
 		double wallx;
@@ -128,11 +128,8 @@ int			raycaster(t_data *data)
 
 		double step = 1.0 * data->walls[0].height / data->ray.lineheight;
 
-		double texpos = ((data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step - step);
-		
-		// unsigned int colour = 0x0000FF;
-		// if (data->ray.side == 1)
-		// 	colour = 0xFFFFFF;
+		double texpos = ((data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step); //The - step is inexlicable
+
 		unsigned int colour;
 		int i = 0;
 		while (i < data->ray.drawstart)
@@ -142,14 +139,7 @@ int			raycaster(t_data *data)
 		}
 		while (data->ray.drawstart <= data->ray.drawend)
 		{
-			// if (texpos <= 0)
-			// 	texpos = 0;
-			// else
-			// 	texpos = texpos;	
-			// int texy = (int)texpos & (data->walls[0].height - 1);
 			colour = colour_getter(data, textx , texpos, compass);
-			// printf("The colour should change: %X\n", colour);
-			// printf("What is textx doing then :%d\n", textx);
 			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);
 			texpos += step;
 			data->ray.drawstart++;

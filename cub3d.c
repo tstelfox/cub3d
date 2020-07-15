@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 12:04:38 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/15 16:54:05 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int		main(int argc, char *argv[])
 	data.mlx = mlx;
 	prs_wrld(&data, argc, argv);
 	mlx_start(&data);
-	// raycast(&data);
 	return (0);
 }
