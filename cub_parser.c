@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 18:31:42 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/18 10:42:09 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		get_sprite(char *lineread, t_data *data, int i)
 {
 	while (lineread[i] != '.')
 		i++;
-	data->sprite.addr = ft_strdup(&lineread[i]);
+	data->sprite_addr = ft_strdup(&lineread[i]);
 	return (0);
 }
 
@@ -189,10 +189,9 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 		free(lineread);
 	}
 	data->maparr = ft_split(data->maptemp, '\n');
-	count_sprites(data);
+	sprites_init(data);
 	printf("Number of sprites do be: %d\n", data->spritenum);
 	player(data);
-	// store_sprite(data);
 	free(data->maptemp);
 	return (0);
 }
