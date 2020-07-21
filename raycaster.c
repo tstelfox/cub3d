@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/15 17:58:24 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/21 18:27:43 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,19 @@ int			raycaster(t_data *data)
 		else
 			wallx = data->player.posx + data->ray.walldist * data->ray.raydirx;
 		wallx -= floor(wallx);
+		// wallx = 1 - wallx;
 
-		//x coordinate on the texture
-		int textx = (int)(wallx * (double)(data->walls[0].width));
+		//x coordinate on the texture - Try wth compass
+		int textx = (int)(wallx * (double)(data->walls[compass].width));
 		if (data->ray.side == 0 && data->ray.raydirx > 0)
-			textx = data->walls[0].width - textx - 1;
+			textx = data->walls[compass].width - textx - 1;
 		if (data->ray.side == 1 && data->ray.raydiry < 0)
-			textx = data->walls[0].width - textx - 1;
+			textx = data->walls[compass].width - textx - 1;
 
-		double step = 1.0 * data->walls[0].height / data->ray.lineheight;
+		double step = 1.0 * data->walls[compass].height / data->ray.lineheight;
 
 		double texpos = ((data->ray.drawstart - data->resy / 2 + data->ray.lineheight / 2) * step); //The - step is inexlicable
+		// exit(0);
 
 		unsigned int colour;
 		int i = 0;
@@ -137,14 +139,16 @@ int			raycaster(t_data *data)
 			my_mlx_pixel_put(data, x, i, data->ceiling.colour);
 			i++;
 		}
-		while (data->ray.drawstart <= data->ray.drawend)
+		while (i <= data->ray.drawend)
 		{
-			colour = colour_getter(data, textx , texpos, compass);
-			my_mlx_pixel_put(data, x, data->ray.drawstart, colour);
+			// printf("texpos be trippin %f\n", texpos);
+			// printf("i and drawend %d %d\n", i, data->ray.drawend);
+			int texy = (int)texpos & (data->walls[compass].height - 1);
+			colour = colour_getter(data, textx, texy, compass);
 			texpos += step;
-			data->ray.drawstart++;
+			my_mlx_pixel_put(data, x, i, colour);
+			i++;
 		}
-		i = data->ray.drawstart;
 		while (i < data->resy)
 		{
 			my_mlx_pixel_put(data, x, i, data->floor.colour);
@@ -153,8 +157,6 @@ int			raycaster(t_data *data)
 		x++;
 
 
-		// mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
-		// 	data->mlx.img, 0, 0);
 		// printf("Walldist = [%f] || mapx,y [%d][%d] || stepx,y [%d][%d] || raydirx,y [%f][%f] || posx, y [%f][%f]\nDeltadx, y = [%f][%f] || sidedx, y [%f][%f]\n", data->ray.walldist,
 		// 		data->ray.mapx, data->ray.mapy, data->ray.stepx, data->ray.stepy, data->ray.raydirx, data->ray.raydiry, data->player.posx, data->player.posy, data->ray.deltadx, data->ray.deltady, data->ray.sidedx, data->ray.sidedy);
 	}

@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/15 18:32:07 by tmullan       ########   odam.nl          #
+#    Updated: 2020/07/21 17:29:12 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o
 	# testh.o
 	# testw.o
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
 
 all: $(NAME)
 
@@ -31,10 +31,10 @@ $(NAME): $(OBJ)
 	make -C $(GNL_DIR)
 	make -C $(LIBFT)
 	cp $(MLX_DIR)/libmlx.dylib .
-	$(CC) $^ -Llibft -lft -Lgnl -lgnl  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS) -g
+	$(CC) $^ -Llibft -lft -Lgnl -lgnl  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS)
 	
 %.o: %.c
-	$(CC) -Imlx -c $< -o $@
+	$(CC) $(FLAGS) -Imlx -c $< -o $@
 
 clean:
 	# make clean -C $(MLX_DIR)

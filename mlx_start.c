@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/18 10:40:47 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/21 18:25:06 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ unsigned int	colour_getter(t_data *data, int x, int y, int compass)
 {
 	char	*dst;
 
-	dst = data->tex[compass] + (y * data->walls[compass].linelen + (x * (data->walls[compass].bpp /8)));
+	// if (y == 256)
+	// 	y = 255;
+	// printf(" x and y be like : %d %d\n", x, y);
+	dst = data->tex[compass] + ((y * data->walls[compass].linelen) + (x * (data->walls[compass].bpp /8)));
 	return(*(unsigned int*)dst);
 }
 
@@ -183,9 +186,6 @@ void		addr_sprite(t_data *data)
 
 void		mlx_start(t_data *data)
 {
-	int		img_width;
-	int		img_height;
-
 	data->mlx.mlx = mlx_init();
 	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, data->resx,
 			data->resy, "mumyer");
