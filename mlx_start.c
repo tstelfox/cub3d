@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/21 18:25:06 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/21 21:27:10 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,6 @@ void		mlx_start(t_data *data)
 	raycaster(data);
 	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
 	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
-	mlx_loop_hook(data->mlx.mlx, raycaster, data);
+	// mlx_loop_hook(data->mlx.mlx, raycaster, data);
 	mlx_loop(data->mlx.mlx);
 }
