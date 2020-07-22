@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/21 21:05:04 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/22 18:27:44 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			raycaster(t_data *data)
 	double	zbuffer[data->resx];
 
 	x = 0;
-
+	data->casts.zbuffer = zbuffer;
 	while (x < data->resx)
 	{
 		// Ray position and direction
@@ -155,7 +155,7 @@ int			raycaster(t_data *data)
 			my_mlx_pixel_put(data, x, i, data->floor.colour);
 			i++;
 		}
-		zbuffer[x] = data->ray.walldist;
+		data->casts.zbuffer[x] = data->ray.walldist;
 		x++;
 
 
@@ -163,6 +163,10 @@ int			raycaster(t_data *data)
 		// 		data->ray.mapx, data->ray.mapy, data->ray.stepx, data->ray.stepy, data->ray.raydirx, data->ray.raydiry, data->player.posx, data->player.posy, data->ray.deltadx, data->ray.deltady, data->ray.sidedx, data->ray.sidedy);
 	}
 	sprite_order(data);
+
+	//Lez draw sum spraitez
+	sprite_draw(data);
+
 	movement(data);
 	frame_update(data);
 	return (0);

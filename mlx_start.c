@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/21 21:27:10 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/22 22:14:16 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 unsigned int	colour_getter(t_data *data, int x, int y, int compass)
 {
 	char	*dst;
-
-	// if (y == 256)
-	// 	y = 255;
-	// printf(" x and y be like : %d %d\n", x, y);
-	dst = data->tex[compass] + ((y * data->walls[compass].linelen) + (x * (data->walls[compass].bpp /8)));
-	return(*(unsigned int*)dst);
+	if (compass == 42)
+	{
+		dst = data->sprite_addr + ((y * data->spt.linelen) + (x * (data->spt.bpp / 8)));
+		return (*(unsigned int*)dst);
+	}
+	dst = data->tex[compass] + ((y * data->walls[compass].linelen) + (x * (data->walls[compass].bpp / 8)));
+	return (*(unsigned int*)dst);
 }
 
 int			frame_update(t_data *data)
@@ -108,27 +109,27 @@ int			keypressed(int keycode, t_data *data)
 	if (keycode == 13)
 	{
 		data->ray.key[0] = 1;
-		printf("AVANTI TUTTA DIOCANEEE\n");
+		// printf("AVANTI TUTTA DIOCANEEE\n");
 	}
 	if (keycode == 1)
 	{
 		data->ray.key[1] = 1;
-		printf("FAI RETROMARCIA CE STANNO E GUARDIE\n");
+		// printf("FAI RETROMARCIA CE STANNO E GUARDIE\n");
 	}
 	if (keycode == 0)
 	{
 		data->ray.key[2] = 1;
-		printf("RIPARTIAMO DALLA SINISTRA\n");
+		// printf("RIPARTIAMO DALLA SINISTRA\n");
 	}
 	if (keycode == 2)
 	{
 		data->ray.key[3] = 1;
-		printf("SE TU DALL'ALTOPIANO GUARDI IL MARE\n");
+		// printf("SE TU DALL'ALTOPIANO GUARDI IL MARE\n");
 	}
 	if (keycode == 123)
 	{
 		data->ray.key[4] = 1;
-		printf("GIRA LA ROTA BIMBO\n");
+		// printf("GIRA LA ROTA BIMBO\n");
 	}
 	if (keycode == 124)
 		data->ray.key[5] = 1;
@@ -197,6 +198,6 @@ void		mlx_start(t_data *data)
 	raycaster(data);
 	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
 	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
-	// mlx_loop_hook(data->mlx.mlx, raycaster, data);
+	mlx_loop_hook(data->mlx.mlx, raycaster, data);
 	mlx_loop(data->mlx.mlx);
 }

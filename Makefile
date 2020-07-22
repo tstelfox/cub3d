@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/21 17:29:12 by tmullan       ########   odam.nl          #
+#    Updated: 2020/07/22 16:44:05 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MLX_DIR = ./mlx
 GNL_DIR = ./gnl
 LIBFT = ./libft
 
-OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o
+OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o sprite_draw.o
 	# testw.o
 	# testl.o
 	# testh.o

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/15 18:13:18 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/21 22:20:45 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/22 15:37:43 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void		sprite_order(t_data *data)
 		}
 		i++;
 	}
-	for (i = 0; i < data->spritenum; i++)
-	{
-		printf("The ordered x and y of the sprites do be [%d]: %f %f\n", i, data->sprite[i].x, data->sprite[i].y);
-		printf("The ordered dist of the sprites do be [%d]: %f\n", i, data->sprite[i].dist);
-	}
+	// for (i = 0; i < data->spritenum; i++)
+	// {
+	// 	printf("The ordered x and y of the sprites do be [%d]: %f %f\n", i, data->sprite[i].x, data->sprite[i].y);
+	// 	printf("The ordered dist of the sprites do be [%d]: %f\n", i, data->sprite[i].dist);
+	// }
 }
