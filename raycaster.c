@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/09 17:10:56 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/22 18:27:44 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 13:42:51 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,7 @@ int			raycaster(t_data *data)
 
 	//Lez draw sum spraitez
 	sprite_draw(data);
-
-	movement(data);
+	// movement(data);
 	frame_update(data);
 	return (0);
 }

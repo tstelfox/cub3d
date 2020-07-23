@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 13:15:26 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 13:41:41 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		rotate(t_data *data)
 		data->player.planex = data->player.planex * cos(data->ray.rotspeed) - data->player.planey * sin(data->ray.rotspeed);
 		data->player.planey = oldplanex * sin(data->ray.rotspeed) + data->player.planey * cos(data->ray.rotspeed);
 	}
-	// raycaster(data);
+	raycaster(data);
 }
 
 int			movement(t_data *data)
@@ -104,6 +104,8 @@ int			movement(t_data *data)
 	}
 	if (data->ray.key[4] == 1 || data->ray.key[5] == 1)
 		rotate(data);
+	else
+		raycaster(data);
 	return (0);
 }
 
@@ -188,6 +190,20 @@ void		addr_sprite(t_data *data)
 				&data->spt.linelen, &data->spt.endian);
 }
 
+int			frames(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (data->ray.key[i] != 0)
+			movement(data);
+		i++;
+	}
+	return (0);
+}
+
 void		mlx_start(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
@@ -202,6 +218,6 @@ void		mlx_start(t_data *data)
 	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
 	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
 	mlx_hook(data->mlx.mlx_win, 17,1L<<2, quit, data);
-	mlx_loop_hook(data->mlx.mlx, raycaster, data);
+	mlx_loop_hook(data->mlx.mlx, frames, data);
 	mlx_loop(data->mlx.mlx);
 }
