@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 13:15:41 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 13:18:54 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 18:56:10 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int		quit(t_data *data)
 {
+	free(data->maparr);
 	exit(0);
 }
