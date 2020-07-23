@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/22 22:24:53 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 13:18:45 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,5 @@ int					movement(t_data *data);
 void				sprites_init(t_data *data);
 void				sprite_order(t_data *data);
 void				sprite_draw(t_data *data);
+int					quit(t_data *data);
 #endif
