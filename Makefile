@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/22 16:44:05 by tmullan       ########   odam.nl          #
+#    Updated: 2020/07/23 13:01:26 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o sprite_draw.
 	# testh.o
 	# testw.o
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
+# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
 
 all: $(NAME)
 

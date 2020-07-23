@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/15 18:13:18 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/22 15:37:43 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 12:36:48 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		sprites_coord(t_data *data)
 			if (data->maparr[y][x] == '2')
 			{
 				store_coord(data, y, x, i); // Store the correct coordinates for every spriteboi
-				printf("Coordinates of the sprite are: %f %f\n", data->sprite[i].x, data->sprite[i].y);
+				// printf("Coordinates of the sprite are: %f %f\n", data->sprite[i].x, data->sprite[i].y);
 				i++;
 			}
 			x++;

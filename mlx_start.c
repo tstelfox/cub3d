@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/22 22:14:16 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 12:50:10 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,39 +68,42 @@ int			movement(t_data *data)
 {
 	if (data->ray.key[0] == 1)
 	{
-		if (data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
+		// if (data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1' && data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '2')
+		if (data->maparr[(int)(data->player.posy + data->player.diry * data->ray.mspeed)][(int)data->player.posx] == '0')
 			data->player.posy += (data->player.diry * data->ray.mspeed);
-		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1')
+		// if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '1' && data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] != '2')
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.dirx * data->ray.mspeed)] == '0')
 			data->player.posx += (data->player.dirx * data->ray.mspeed);
-		// raycaster(data);
 	}
 	if (data->ray.key[1] == 1)
 	{
-		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1')
+		// if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '1' && data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] != '2')
+		if (data->maparr[(int)(data->player.posy - data->player.diry * data->ray.mspeed)][(int)data->player.posx] == '0')
 			data->player.posy -= (data->player.diry * data->ray.mspeed);
-		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '1')
+		// if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '1' && data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] != '2')
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.dirx * data->ray.mspeed)] == '0')
 			data->player.posx -= (data->player.dirx * data->ray.mspeed);
-		// raycaster(data);
 	}
 	if (data->ray.key[2] == 1)
 	{
-		if (data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
+		// if (data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1' && data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '2')
+		if (data->maparr[(int)(data->player.posy - data->player.planey * data->ray.mspeed)][(int)data->player.posx] == '0')
 			data->player.posy -= (data->player.planey * data->ray.mspeed);
-		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] != '1')
+		// if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] != '1' && data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] != '2')
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx - data->player.planex * data->ray.mspeed)] == '0')
 			data->player.posx -= (data->player.planex * data->ray.mspeed);
-		// raycaster(data);
 	}
 	if (data->ray.key[3] == 1)
 	{
-		if (data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1')
+		// if (data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '1' && data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] != '2')
+		if (data->maparr[(int)(data->player.posy + data->player.planey * data->ray.mspeed)][(int)data->player.posx] == '0')
 			data->player.posy += (data->player.planey * data->ray.mspeed);
-		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] != '1')
+		// if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] != '1' && data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] != '2')
+		if (data->maparr[(int)data->player.posy][(int)(data->player.posx + data->player.planex * data->ray.mspeed)] == '0')
 			data->player.posx += (data->player.planex * data->ray.mspeed);
-		// raycaster(data);
 	}
 	if (data->ray.key[4] == 1 || data->ray.key[5] == 1)
 		rotate(data);
-	// raycaster(data);
 	return (0);
 }
 

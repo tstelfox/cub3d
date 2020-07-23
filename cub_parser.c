@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/18 10:42:09 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/23 12:55:51 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	player(t_data *data)
 		if (ft_isalpha(data->maparr[i][k]))
 		{
 			player_pos(data, i, k);
+			data->maparr[i][k] = '0';
 			break ;
 		}
 		k++;
@@ -190,7 +191,7 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 	}
 	data->maparr = ft_split(data->maptemp, '\n');
 	sprites_init(data);
-	printf("Number of sprites do be: %d\n", data->spritenum);
+	// printf("Number of sprites do be: %d\n", data->spritenum);
 	player(data);
 	free(data->maptemp);
 	return (0);
