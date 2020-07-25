@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 13:41:41 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/25 18:45:51 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ unsigned int	colour_getter(t_data *data, int x, int y, int compass)
 
 int			frame_update(t_data *data)
 {
+	if (data->save == 1)
+		screenshotter(data);
 	mlx_sync(1, data->mlx.img);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 		data->mlx.img, 0, 0);

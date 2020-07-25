@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 13:18:45 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/25 20:13:15 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ typedef struct		s_ray
 
 typedef struct		s_data
 {
+	int				bmp;
+	int				save;
 	int				resx;
 	int				resy;
 	int				spritenum;
@@ -128,7 +130,6 @@ typedef struct		s_data
 	t_colour		floor;
 	t_colour		ceiling;
 	t_colour		texcol;
-	// t_map			map;
 	t_player		player;
 	t_mlx			mlx;
 	t_ray			ray;
@@ -154,4 +155,7 @@ void				sprites_init(t_data *data);
 void				sprite_order(t_data *data);
 void				sprite_draw(t_data *data);
 int					quit(t_data *data);
+void				screenshotter(t_data *data);
+int					ft_strcmp(const char *s1, const char *s2);
+void				validator(t_data *data, int argc, char *argv[]);
 #endif

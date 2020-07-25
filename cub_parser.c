@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 12:55:51 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/25 18:52:57 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,6 @@ int		prs_wrld(t_data *data, int argc, char *argv[])
 	char	*lineread;
 
 	i = 0;
-	if (argc == 1)
-	{
-		printf("Didn't attach a map file, bleedin eejit\n");
-		return (1);
-	}
 	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, &lineread))
 	{

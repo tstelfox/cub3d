@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   quit.c                                             :+:    :+:            */
+/*   validator.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/23 13:15:41 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 18:53:45 by tmullan       ########   odam.nl         */
+/*   Created: 2020/07/25 18:52:01 by tmullan       #+#    #+#                 */
+/*   Updated: 2020/07/25 19:12:59 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		quit(t_data *data)
+void		validator(t_data *data, int argc, char *argv[])
 {
-	exit(0);
+	if (argc == 1)
+	{
+		printf("Didn't attach a map file, bleedin eejit\n");
+		quit(data);
+	}
+	if (argc == 3)
+	{
+		if (!ft_strcmp(argv[2], "--save"))
+			data->save = 1;
+		else
+		{
+			printf("Misspelling\n");
+			quit(data);
+		}
+	}
 }
