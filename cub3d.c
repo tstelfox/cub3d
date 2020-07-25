@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 18:51:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/25 21:15:14 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	data_init(t_data *data)
 	data->ray.lineheight = 0;
 	data->ray.drawstart = 0;
 	data->ray.drawend = 0;
-	data->ray.mspeed = 0.05;
-	data->ray.rotspeed = 0.04;
+	data->ray.mspeed = 0.09;
+	data->ray.rotspeed = 0.07;
 	data->maptemp = NULL;
 	data->save = 0;
 	int i = 0;
