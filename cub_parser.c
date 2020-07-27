@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 21:15:26 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/27 19:18:28 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ int		get_res(char *lineread, t_data *data, int i)
 	int x;
 	int y;
 
-	while (!ft_isdigit(lineread[i]))
+	while (ft_whitespace(&lineread[i]) && lineread[i] != '-')
 		i++;
 	data->resx = ft_atoi(&lineread[i]);
 	while (ft_isdigit(lineread[i]))
 		i++;
+	while (ft_whitespace(&lineread[i]) && lineread[i] != '-')
+		i++;
 	data->resy = ft_atoi(&lineread[i]);
+	if (data->resx <= 0 || data->resy <= 0)
+		bad_input(data, 1);
 	mlx_get_screen_size(data->mlx.mlx, &x, &y);
 	if (data->resx > x)
 		data->resx = x;

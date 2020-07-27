@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:52:01 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 19:12:59 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/27 18:03:25 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 void		validator(t_data *data, int argc, char *argv[])
 {
 	if (argc == 1)
-	{
-		printf("Didn't attach a map file, bleedin eejit\n");
-		quit(data);
-	}
+		bad_input(data, 2);
 	if (argc == 3)
 	{
 		if (!ft_strcmp(argv[2], "--save"))
 			data->save = 1;
 		else
-		{
-			printf("Misspelling\n");
-			quit(data);
-		}
+			bad_input(data, 3);
 	}
 }

@@ -1,4 +1,4 @@
-R 200000 20000
+R 1000 800
 NO ./texts/smooth.xpm
 EA ./texts/bricks.xpm
 SO ./texts/rock.xpm

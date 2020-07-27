@@ -1,4 +1,4 @@
-R 1090 690
+R 1080 690
 NO ./texts/smooth.xpm
 EA ./texts/bricks.xpm
 SO ./texts/rock.xpm

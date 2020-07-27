@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 20:13:15 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/27 17:50:30 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include <unistd.h>
 # include <stdio.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <math.h>
 # include "./libft/libft.h"
@@ -31,12 +32,6 @@ typedef union		u_colour
 		unsigned char a;
 	}				t_rgb;
 }					t_colour;
-
-// typedef	struct		s_map
-// {
-// 	int				width;
-// 	int				height;
-// }					t_map;
 
 typedef	struct		s_player
 {
@@ -92,7 +87,6 @@ typedef struct		s_cast
 	int				dendx;
 	double			*zbuffer;
 }					t_cast;
-
 
 typedef struct		s_ray
 {
@@ -158,4 +152,5 @@ int					quit(t_data *data);
 void				screenshotter(t_data *data);
 int					ft_strcmp(const char *s1, const char *s2);
 void				validator(t_data *data, int argc, char *argv[]);
+void				bad_input(t_data *data, int type);
 #endif
