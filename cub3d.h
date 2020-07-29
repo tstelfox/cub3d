@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 18:18:14 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 19:03:27 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "./libft/libft.h"
 
 # define ERR_RES "Error\nResolution misconfigured\n"
-# define ERR_FLOOR "Error\nFloor misconfigured\n"
-# define ERR_CEILING "Error\nCeiling misconfigured\n"
+# define ERR_F "Error\nFloor misconfigured\n"
+# define ERR_C "Error\nCeiling misconfigured\n"
 # define ERR_ELEM "Error\nIncorrect amount of configuration elements\n"
 
 typedef union		u_colour

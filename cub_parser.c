@@ -6,27 +6,27 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 18:56:28 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 19:03:39 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		get_res(char *lineread, t_data *data, int i)
+void		get_res(char *line, t_data *data, int i)
 {
 	int x;
 	int y;
 
-	while (!ft_isdigit(lineread[i]))
-		!ft_whitespace(lineread[i]) ? bad_input(data, ERR_RES) : i++;
-	data->resx = ft_atoi(&lineread[i]);
-	while (ft_isdigit(lineread[i]))
+	while (!ft_isdigit(line[i]))
+		!ft_whitespace(line[i]) ? bad_input(data, ERR_RES) : i++;
+	data->resx = ft_atoi(&line[i]);
+	while (ft_isdigit(line[i]))
 		i++;
-	data->resy = ft_atoi(&lineread[i]);
-	while (ft_isdigit(lineread[i]) || ft_whitespace(lineread[i]))
+	data->resy = ft_atoi(&line[i]);
+	while (ft_isdigit(line[i]) || ft_whitespace(line[i]))
 		i++;
-	while (lineread[i] != '\0')
-		!ft_whitespace(lineread[i]) ? bad_input(data, ERR_RES) : i++;
+	while (line[i] != '\0')
+		!ft_whitespace(line[i]) ? bad_input(data, ERR_RES) : i++;
 	if (data->resx <= 0 || data->resy <= 0)
 		bad_input(data, ERR_RES);
 	if (data->save == 1)
@@ -38,84 +38,83 @@ void		get_res(char *lineread, t_data *data, int i)
 		data->resy = y;
 }
 
-void		get_floor(char *lineread, t_data *data, int i)
+void		get_floor(char *line, t_data *data, int i)
 {
-	int temp = 0;
+	int temp;
 
-	while (ft_whitespace(lineread[i]))
+	temp = 0;
+	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
-			bad_input(data, ERR_FLOOR);
+	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_F);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.r = temp
-			: bad_input(data, ERR_FLOOR);
-	while (ft_isdigit(lineread[i]))
+			: bad_input(data, ERR_F);
+	while (ft_isdigit(line[i]))
 		i++;
-	lineread[i] != ',' ? bad_input(data, ERR_FLOOR) : i++;
-	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
-			bad_input(data, ERR_FLOOR);
+	line[i] != ',' ? bad_input(data, ERR_F) : i++;
+	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) :
+			bad_input(data, ERR_F);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.g = temp :
-			bad_input(data, ERR_FLOOR);
-	while (ft_isdigit(lineread[i]))
+			bad_input(data, ERR_F);
+	while (ft_isdigit(line[i]))
 		i++;
-	lineread[i] != ',' ? bad_input(data, ERR_FLOOR) : i++;
-	temp = ft_atoi(&lineread[i]);
+	line[i] != ',' ? bad_input(data, ERR_F) : i++;
+	temp = ft_atoi(&line[i]);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.b = temp :
-			bad_input(data, ERR_FLOOR);
-	while (ft_isdigit(lineread[i]))
+			bad_input(data, ERR_F);
+	while (ft_isdigit(line[i]))
 		i++;
-	while (lineread[i] != '\0')
-		ft_whitespace(lineread[i]) ? i++ : bad_input(data, ERR_FLOOR);
+	while (line[i] != '\0')
+		ft_whitespace(line[i]) ? i++ : bad_input(data, ERR_F);
 }
 
-void		get_ceiling(char *lineread, t_data *data, int i)
+void		get_ceiling(char *line, t_data *data, int i)
 {
-	int temp = 0;
+	int temp;
 
-	while (ft_whitespace(lineread[i]))
+	temp = 0;
+	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
-			bad_input(data, ERR_CEILING);
+	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_C);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.r = temp
-			: bad_input(data, ERR_CEILING);
-	while (ft_isdigit(lineread[i]))
+			: bad_input(data, ERR_C);
+	while (ft_isdigit(line[i]))
 		i++;
-	lineread[i] != ',' ? bad_input(data, ERR_CEILING) : i++;
-	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
-			bad_input(data, ERR_CEILING);
+	line[i] != ',' ? bad_input(data, ERR_C) : i++;
+	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_C);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.g = temp :
-			bad_input(data, ERR_CEILING);
-	while (ft_isdigit(lineread[i]))
+			bad_input(data, ERR_C);
+	while (ft_isdigit(line[i]))
 		i++;
-	lineread[i] != ',' ? bad_input(data, ERR_CEILING) : i++;
-	temp = ft_atoi(&lineread[i]);
+	line[i] != ',' ? bad_input(data, ERR_C) : i++;
+	temp = ft_atoi(&line[i]);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.b = temp :
-			bad_input(data, ERR_CEILING);
-	while (ft_isdigit(lineread[i]))
+			bad_input(data, ERR_C);
+	while (ft_isdigit(line[i]))
 		i++;
-	while (lineread[i] != '\0')
-		ft_whitespace(lineread[i]) ? i++ : bad_input(data, ERR_CEILING);
+	while (line[i] != '\0')
+		ft_whitespace(line[i]) ? i++ : bad_input(data, ERR_C);
 }
 
-void		get_sprite(char *lineread, t_data *data, int i)
+void		get_sprite(char *line, t_data *data, int i)
 {
-	while (lineread[i] != '.')
+	while (line[i] != '.')
 		i++;
-	data->sprite_addr = ft_strdup(&lineread[i]);
+	data->sprite_addr = ft_strdup(&line[i]);
 }
 
-void		get_texture(char *lineread, t_data *data, int i, int side)
+void		get_texture(char *line, t_data *data, int i, int side)
 {
-	while (lineread[i] != '.')
+	while (line[i] != '.')
 		i++;
-	data->tex[side] = ft_strdup(&lineread[i]);
+	data->tex[side] = ft_strdup(&line[i]);
 }
 
-void		get_map(char *lineread, t_data *data)
+void		get_map(char *line, t_data *data)
 {
 	if (!data->maptemp)
-		data->maptemp = ft_strdup(lineread);
+		data->maptemp = ft_strdup(line);
 	else
-		data->maptemp = ft_strjoinnl(data->maptemp, lineread);
+		data->maptemp = ft_strjoinnl(data->maptemp, line);
 }
 
 void		west_dir(t_data *data)
@@ -188,70 +187,66 @@ void		player(t_data *data)
 	}
 }
 
-void		get_configs(t_data *data, char *lineread, int i)
+void		get_configs(t_data *data, char *line, int i)
 {
-	if (lineread[i] == 'R')
-		get_res(lineread, data, i + 1);
-	if (lineread[i] == 'F')
-		get_floor(lineread, data, i + 1);
-	if (lineread[i] == 'C')
-		get_ceiling(lineread, data, i + 1);
-	if (lineread[i] == 'N' && lineread[i + 1] == 'O')
-		get_texture(lineread, data, i, 0);
-	if (lineread[i] == 'E' && lineread[i + 1] == 'A')
-		get_texture(lineread, data, i, 1);
-	if (lineread[i] == 'S' && lineread[i + 1] == 'O')
-		get_texture(lineread, data, i, 2);
-	if (lineread[i] == 'W' && lineread[i + 1] == 'E')
-		get_texture(lineread, data, i, 3);
-	if (lineread[i] == 'S' && lineread[i + 1] != 'O')
-		get_sprite(lineread, data, i);
-	if (lineread[i] == '1')
-		get_map(lineread, data);
-	free(lineread);
+	if (line[i] == 'R')
+		get_res(line, data, i + 1);
+	if (line[i] == 'F')
+		get_floor(line, data, i + 1);
+	if (line[i] == 'C')
+		get_ceiling(line, data, i + 1);
+	if (line[i] == 'N' && line[i + 1] == 'O')
+		get_texture(line, data, i, 0);
+	if (line[i] == 'E' && line[i + 1] == 'A')
+		get_texture(line, data, i, 1);
+	if (line[i] == 'S' && line[i + 1] == 'O')
+		get_texture(line, data, i, 2);
+	if (line[i] == 'W' && line[i + 1] == 'E')
+		get_texture(line, data, i, 3);
+	if (line[i] == 'S' && line[i + 1] != 'O')
+		get_sprite(line, data, i);
+	if (line[i] == '1')
+		get_map(line, data);
+	free(line);
 }
 
-void			count_configs(t_data *data, char *lineread, int i)
+void		count_configs(t_data *data, char *line, int i)
 {
-	if (lineread[i] == 'R')
+	if (line[i] == 'R')
 		data->parse[0] == 0 ? data->parse[0] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'F')
+	if (line[i] == 'F')
 		data->parse[1] == 0 ? data->parse[1] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'C')
+	if (line[i] == 'C')
 		data->parse[2] == 0 ? data->parse[2] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'N' && lineread[i + 1] == 'O')
+	if (line[i] == 'N' && line[i + 1] == 'O')
 		data->parse[3] == 0 ? data->parse[3] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'E' && lineread[i + 1] == 'A')
+	if (line[i] == 'E' && line[i + 1] == 'A')
 		data->parse[4] == 0 ? data->parse[4] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'S' && lineread[i + 1] == 'O')
+	if (line[i] == 'S' && line[i + 1] == 'O')
 		data->parse[5] == 0 ? data->parse[5] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'W' && lineread[i + 1] == 'E')
+	if (line[i] == 'W' && line[i + 1] == 'E')
 		data->parse[6] == 0 ? data->parse[6] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == 'S' && lineread[i + 1] != 'O')
+	if (line[i] == 'S' && line[i + 1] != 'O')
 		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(data, ERR_ELEM);
-	if (lineread[i] == '1')
+	if (line[i] == '1')
 	{
 		data->parse[8] = 1;
 		while (i < 8)
-		{
-			if (data->parse[i] == 0)
-				bad_input(data, ERR_ELEM);
-			i++;
-		}
+			data->parse[i] == 0 ? bad_input(data, ERR_ELEM) : i++;
 	}
 }
 
 int			prs_wrld(t_data *data, int fd)
 {
 	int		i;
-	char	*lineread;
+	char	*line;
 
 	i = 0;
-	while (get_next_line(fd, &lineread))
+	while (get_next_line(fd, &line))
 	{
-		// map_check(data, lineread, i);
-		count_configs(data, lineread, i);
-		get_configs(data, lineread, i);
+		// map_check(data, line, i);
+		count_configs(data, line, i);
+		get_configs(data, line, i);
 	}
 	data->maparr = ft_split(data->maptemp, '\n');
 	sprites_init(data);
