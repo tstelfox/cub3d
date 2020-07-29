@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 16:22:39 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 18:56:28 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void		get_res(char *lineread, t_data *data, int i)
 
 void		get_floor(char *lineread, t_data *data, int i)
 {
-	int temp;
-	
+	int temp = 0;
+
 	while (ft_whitespace(lineread[i]))
 		i++;
 	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
@@ -69,8 +69,8 @@ void		get_floor(char *lineread, t_data *data, int i)
 
 void		get_ceiling(char *lineread, t_data *data, int i)
 {
-	int temp;
-	
+	int temp = 0;
+
 	while (ft_whitespace(lineread[i]))
 		i++;
 	ft_isdigit(lineread[i]) ? temp = ft_atoi(&lineread[i]) :
@@ -96,7 +96,7 @@ void		get_ceiling(char *lineread, t_data *data, int i)
 		ft_whitespace(lineread[i]) ? i++ : bad_input(data, ERR_CEILING);
 }
 
-void	get_sprite(char *lineread, t_data *data, int i)
+void		get_sprite(char *lineread, t_data *data, int i)
 {
 	while (lineread[i] != '.')
 		i++;
@@ -188,42 +188,74 @@ void		player(t_data *data)
 	}
 }
 
-int			prs_wrld(t_data *data, int argc, char *argv[])
+void		get_configs(t_data *data, char *lineread, int i)
 {
-	int		fd;
+	if (lineread[i] == 'R')
+		get_res(lineread, data, i + 1);
+	if (lineread[i] == 'F')
+		get_floor(lineread, data, i + 1);
+	if (lineread[i] == 'C')
+		get_ceiling(lineread, data, i + 1);
+	if (lineread[i] == 'N' && lineread[i + 1] == 'O')
+		get_texture(lineread, data, i, 0);
+	if (lineread[i] == 'E' && lineread[i + 1] == 'A')
+		get_texture(lineread, data, i, 1);
+	if (lineread[i] == 'S' && lineread[i + 1] == 'O')
+		get_texture(lineread, data, i, 2);
+	if (lineread[i] == 'W' && lineread[i + 1] == 'E')
+		get_texture(lineread, data, i, 3);
+	if (lineread[i] == 'S' && lineread[i + 1] != 'O')
+		get_sprite(lineread, data, i);
+	if (lineread[i] == '1')
+		get_map(lineread, data);
+	free(lineread);
+}
+
+void			count_configs(t_data *data, char *lineread, int i)
+{
+	if (lineread[i] == 'R')
+		data->parse[0] == 0 ? data->parse[0] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'F')
+		data->parse[1] == 0 ? data->parse[1] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'C')
+		data->parse[2] == 0 ? data->parse[2] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'N' && lineread[i + 1] == 'O')
+		data->parse[3] == 0 ? data->parse[3] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'E' && lineread[i + 1] == 'A')
+		data->parse[4] == 0 ? data->parse[4] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'S' && lineread[i + 1] == 'O')
+		data->parse[5] == 0 ? data->parse[5] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'W' && lineread[i + 1] == 'E')
+		data->parse[6] == 0 ? data->parse[6] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == 'S' && lineread[i + 1] != 'O')
+		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(data, ERR_ELEM);
+	if (lineread[i] == '1')
+	{
+		data->parse[8] = 1;
+		while (i < 8)
+		{
+			if (data->parse[i] == 0)
+				bad_input(data, ERR_ELEM);
+			i++;
+		}
+	}
+}
+
+int			prs_wrld(t_data *data, int fd)
+{
 	int		i;
 	char	*lineread;
 
 	i = 0;
-	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, &lineread))
 	{
-		if (lineread[i] == 'R')
-			get_res(lineread, data, i + 1);
-		if (lineread[i] == 'F')
-			get_floor(lineread, data, i + 1);
-		if (lineread[i] == 'C')
-			get_ceiling(lineread, data, i + 1);
-		if (lineread[i] == 'N' && lineread[i + 1] == 'O')
-			get_texture(lineread, data, i, 0);
-		if (lineread[i] == 'E' && lineread[i + 1] == 'A')
-			get_texture(lineread, data, i, 1);
-		if (lineread[i] == 'S' && lineread[i + 1] == 'O')
-			get_texture(lineread, data, i, 2);
-		if (lineread[i] == 'W' && lineread[i + 1] == 'E')
-			get_texture(lineread, data, i, 3);
-		if (lineread[i] == 'S' && lineread[i + 1] != 'O')
-			get_sprite(lineread, data, i);
-		if (lineread[i] == '1')
-			get_map(lineread, data);
-		i = 0;
-		free(lineread);
+		// map_check(data, lineread, i);
+		count_configs(data, lineread, i);
+		get_configs(data, lineread, i);
 	}
 	data->maparr = ft_split(data->maptemp, '\n');
 	sprites_init(data);
-	// printf("Number of sprites do be: %d\n", data->spritenum);
 	player(data);
 	free(data->maptemp);
-	close(fd);
 	return (0);
 }

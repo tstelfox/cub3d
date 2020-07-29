@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 11:57:50 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 18:18:14 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERR_RES "Error\nResolution misconfigured\n"
 # define ERR_FLOOR "Error\nFloor misconfigured\n"
 # define ERR_CEILING "Error\nCeiling misconfigured\n"
+# define ERR_ELEM "Error\nIncorrect amount of configuration elements\n"
 
 typedef union		u_colour
 {
@@ -116,10 +117,24 @@ typedef struct		s_ray
 	int				key[6];
 }					t_ray;
 
+// typedef struct		s_parse
+// {
+// 	int				R;
+// 	int				F;
+// 	int				C;
+// 	int				NO;
+// 	int				EA;
+// 	int				SO;
+// 	int				WE;
+// 	int				S;
+// 	int				MAP;
+// }					t_parse;
+
 typedef struct		s_data
 {
 	int				bmp;
 	int				save;
+	int				parse[9]; //Maybe needs its own struct
 	int				resx;
 	int				resy;
 	int				spritenum;
@@ -139,7 +154,7 @@ typedef struct		s_data
 	t_cast			casts;
 }					t_data;
 
-int					prs_wrld(t_data *data, int argc, char *argv[]);
+int					prs_wrld(t_data *data, int fd);
 void				data_init(t_data *data);
 int					get_next_line(int fd, char **line);
 char				*ft_strjoinnl(char const *s1, char const *s2);

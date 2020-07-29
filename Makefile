@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/29 10:19:32 by tmullan       ########   odam.nl          #
+#    Updated: 2020/07/29 18:46:54 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = ./libft
 OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o sprite_draw.o \
 		quit.o bmp.o validator.o
 
-# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 21:15:14 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 18:32:50 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	data_init(t_data *data)
 		data->ray.key[i] = 0;
 		i++;
 	}
+	i = 0;
+	while (i < 9)
+	{
+		data->parse[i] = 0;
+		i++;
+	}
 }
 
 void	zero_mlx(t_mlx *mlx)
@@ -71,9 +77,7 @@ int		main(int argc, char *argv[])
 	zero_mlx(&mlx);
 	data.mlx = mlx;
 	validator(&data, argc, argv);
-	prs_wrld(&data, argc, argv);
+	// prs_wrld(&data, argc, argv);
 	mlx_start(&data);
-	while (1)
-	{}
 	return (0);
 }
