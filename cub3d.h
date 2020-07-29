@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/27 17:50:30 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 11:57:50 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <fcntl.h>
 # include <math.h>
 # include "./libft/libft.h"
+
+# define ERR_RES "Error\nResolution misconfigured\n"
+# define ERR_FLOOR "Error\nFloor misconfigured\n"
+# define ERR_CEILING "Error\nCeiling misconfigured\n"
 
 typedef union		u_colour
 {
@@ -152,5 +156,6 @@ int					quit(t_data *data);
 void				screenshotter(t_data *data);
 int					ft_strcmp(const char *s1, const char *s2);
 void				validator(t_data *data, int argc, char *argv[]);
-void				bad_input(t_data *data, int type);
+void				bad_input(t_data *data, char *error);
+int					ft_whitespace(char c);
 #endif

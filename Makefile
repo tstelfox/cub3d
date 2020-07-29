@@ -6,11 +6,11 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/27 18:13:01 by tmullan       ########   odam.nl          #
+#    Updated: 2020/07/29 10:19:32 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = giza
+NAME = cub3D
 
 MLX_DIR = ./mlx
 GNL_DIR = ./gnl
