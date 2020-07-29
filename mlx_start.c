@@ -6,13 +6,13 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/27 16:29:23 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/29 19:15:56 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
+void			my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 {
 	char	*dst;
 
@@ -23,16 +23,19 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 unsigned int	colour_getter(t_data *data, int x, int y, int compass)
 {
 	char	*dst;
+
 	if (compass == 42)
 	{
-		dst = data->sprite_addr + ((y * data->spt.linelen) + (x * (data->spt.bpp / 8)));
+		dst = data->sprite_addr + ((y * data->spt.linelen) +
+				(x * (data->spt.bpp / 8)));
 		return (*(unsigned int*)dst);
 	}
-	dst = data->tex[compass] + ((y * data->walls[compass].linelen) + (x * (data->walls[compass].bpp / 8)));
+	dst = data->tex[compass] + ((y * data->walls[compass].linelen) +
+		(x * (data->walls[compass].bpp / 8)));
 	return (*(unsigned int*)dst);
 }
 
-int			frame_update(t_data *data)
+int				frame_update(t_data *data)
 {
 	if (data->save == 1)
 		screenshotter(data);
@@ -43,30 +46,44 @@ int			frame_update(t_data *data)
 	return (0);
 }
 
-void		rotate(t_data *data)
+void			rotate_left(t_data *data, double oldirx, double oldplanex)
 {
+	oldirx = data->player.dirx;
+	data->player.dirx = data->player.dirx * cos(-data->ray.rotspeed) -
+		data->player.diry * sin(-data->ray.rotspeed);
+	data->player.diry = oldirx * sin(-data->ray.rotspeed) +
+		data->player.diry * cos(-data->ray.rotspeed);
+	oldplanex = data->player.planex;
+	data->player.planex = data->player.planex * cos(-data->ray.rotspeed) -
+		data->player.planey * sin(-data->ray.rotspeed);
+	data->player.planey = oldplanex * sin(-data->ray.rotspeed) +
+		data->player.planey * cos(-data->ray.rotspeed);
+}
+
+void			rotate(t_data *data)
+{
+	double oldirx;
+	double oldplanex;
+
 	if (data->ray.key[4] == 1)
+		rotate_left(data, oldirx, oldplanex);
+	if (data->ray.key[5] == 1)
 	{
-		double oldirx = data->player.dirx;
-		data->player.dirx = data->player.dirx * cos(-data->ray.rotspeed) - data->player.diry * sin(-data->ray.rotspeed);
-		data->player.diry = oldirx * sin(-data->ray.rotspeed) + data->player.diry * cos(-data->ray.rotspeed);
-		double oldplanex = data->player.planex;
-		data->player.planex = data->player.planex * cos(-data->ray.rotspeed) - data->player.planey * sin(-data->ray.rotspeed);
-		data->player.planey = oldplanex * sin(-data->ray.rotspeed) + data->player.planey * cos(-data->ray.rotspeed);
-	}
-	if (data->ray.key[5] == 1) //Left-rotate
-	{
-		double oldirx = data->player.dirx;
-		data->player.dirx = data->player.dirx * cos(data->ray.rotspeed) - data->player.diry * sin(data->ray.rotspeed);
-		data->player.diry = oldirx * sin(data->ray.rotspeed) + data->player.diry * cos(data->ray.rotspeed);
-		double oldplanex = data->player.planex;
-		data->player.planex = data->player.planex * cos(data->ray.rotspeed) - data->player.planey * sin(data->ray.rotspeed);
-		data->player.planey = oldplanex * sin(data->ray.rotspeed) + data->player.planey * cos(data->ray.rotspeed);
+		oldirx = data->player.dirx;
+		data->player.dirx = data->player.dirx * cos(data->ray.rotspeed) -
+			data->player.diry * sin(data->ray.rotspeed);
+		data->player.diry = oldirx * sin(data->ray.rotspeed) +
+			data->player.diry * cos(data->ray.rotspeed);
+		oldplanex = data->player.planex;
+		data->player.planex = data->player.planex * cos(data->ray.rotspeed) -
+			data->player.planey * sin(data->ray.rotspeed);
+		data->player.planey = oldplanex * sin(data->ray.rotspeed) +
+			data->player.planey * cos(data->ray.rotspeed);
 	}
 	raycaster(data);
 }
 
-int			movement(t_data *data)
+int				movement(t_data *data)
 {
 	if (data->ray.key[0] == 1)
 	{
@@ -103,7 +120,7 @@ int			movement(t_data *data)
 	return (0);
 }
 
-int			keypressed(int keycode, t_data *data)
+int				keypressed(int keycode, t_data *data)
 {
 	if (keycode == 13)
 		data->ray.key[0] = 1;
@@ -122,7 +139,7 @@ int			keypressed(int keycode, t_data *data)
 	return (0);
 }
 
-int			keyreleased(int keycode, t_data *data)
+int				keyreleased(int keycode, t_data *data)
 {
 	if (keycode == 13)
 		data->ray.key[0] = 0;
@@ -139,7 +156,7 @@ int			keyreleased(int keycode, t_data *data)
 	return (0);
 }
 
-void		init_texture(t_data *data)
+void			init_texture(t_data *data)
 {
 	int		img_width;
 	int		img_height;
@@ -157,7 +174,7 @@ void		init_texture(t_data *data)
 	}
 }
 
-void		addr_sprite(t_data *data)
+void			addr_sprite(t_data *data)
 {
 	int		img_width;
 	int		img_height;
@@ -169,7 +186,7 @@ void		addr_sprite(t_data *data)
 				&data->spt.linelen, &data->spt.endian);
 }
 
-int			frames(t_data *data)
+int				frames(t_data *data)
 {
 	int i;
 
@@ -183,7 +200,7 @@ int			frames(t_data *data)
 	return (0);
 }
 
-void		mlx_start(t_data *data)
+void			mlx_start(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
 	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, data->resx,
@@ -194,9 +211,9 @@ void		mlx_start(t_data *data)
 	init_texture(data);
 	addr_sprite(data);
 	raycaster(data);
-	mlx_hook(data->mlx.mlx_win, 02, 1L<<0, keypressed, data);
-	mlx_hook(data->mlx.mlx_win, 03, 1L<<1, keyreleased, data);
-	mlx_hook(data->mlx.mlx_win, 17,1L<<2, quit, data);
+	mlx_hook(data->mlx.mlx_win, 02, 1L << 0, keypressed, data);
+	mlx_hook(data->mlx.mlx_win, 03, 1L << 1, keyreleased, data);
+	mlx_hook(data->mlx.mlx_win, 17, 1L << 2, quit, data);
 	mlx_loop_hook(data->mlx.mlx, frames, data);
 	mlx_loop(data->mlx.mlx);
 }
