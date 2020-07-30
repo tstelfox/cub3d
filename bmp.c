@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:45:59 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/25 21:05:27 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 16:57:11 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ unsigned int	image_colour(t_data *data, int x, int y)
 {
 	char	*dst;
 
-	dst = data->mlx.addr + ((y * data->mlx.linelen) + (x * (data->mlx.bpp / 8)));
+	dst = data->mlx.addr + ((y * data->mlx.linelen) +
+		(x * (data->mlx.bpp / 8)));
 	return (*(unsigned int*)dst);
 }
 
-void		char_to_int(unsigned char *header, int n)
+void			char_to_int(unsigned char *header, int n)
 {
 	header[0] = (unsigned char)(n);
 	header[1] = (unsigned char)(n >> 8);
@@ -28,11 +29,11 @@ void		char_to_int(unsigned char *header, int n)
 	header[3] = (unsigned char)(n >> 24);
 }
 
-void		bmpcontent(t_data *data)
+void			bmpcontent(t_data *data)
 {
-	int			x;
-	int 		y;
-	t_colour	colour;
+	int				x;
+	int				y;
+	t_colour		colour;
 	unsigned char	pad;
 
 	pad = 0;
@@ -51,10 +52,10 @@ void		bmpcontent(t_data *data)
 	}
 }
 
-void		bmpheader(t_data *data, int filesize)
+void			bmpheader(t_data *data, int filesize)
 {
-	int i;
-	unsigned char header[54];
+	int				i;
+	unsigned char	header[54];
 
 	i = 0;
 	while (i < 54)
@@ -74,7 +75,7 @@ void		bmpheader(t_data *data, int filesize)
 	write(data->bmp, header, 54);
 }
 
-void		screenshotter(t_data *data)
+void			screenshotter(t_data *data)
 {
 	int filesize;
 

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 19:03:27 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 17:38:00 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,26 +115,15 @@ typedef struct		s_ray
 	double			mspeed;
 	double			rotspeed;
 	int				key[6];
+	int				compass;
+	double			step;
 }					t_ray;
-
-// typedef struct		s_parse
-// {
-// 	int				R;
-// 	int				F;
-// 	int				C;
-// 	int				NO;
-// 	int				EA;
-// 	int				SO;
-// 	int				WE;
-// 	int				S;
-// 	int				MAP;
-// }					t_parse;
 
 typedef struct		s_data
 {
 	int				bmp;
 	int				save;
-	int				parse[9]; //Maybe needs its own struct
+	int				parse[9];
 	int				resx;
 	int				resy;
 	int				spritenum;
@@ -157,7 +146,7 @@ typedef struct		s_data
 int					prs_wrld(t_data *data, int fd);
 void				data_init(t_data *data);
 int					get_next_line(int fd, char **line);
-char				*ft_strjoinnl(char const *s1, char const *s2);
+char				*ft_strjoinnl(char *s1, char *s2);
 void				mlx_start(t_data *data);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int colour);
 unsigned int		colour_getter(t_data *data, int x, int y, int compass);
@@ -166,11 +155,17 @@ int					frame_update(t_data *data);
 int					movement(t_data *data);
 void				sprites_init(t_data *data);
 void				sprite_order(t_data *data);
-void				sprite_draw(t_data *data);
+void				sprite_render(t_data *data);
 int					quit(t_data *data);
 void				screenshotter(t_data *data);
 int					ft_strcmp(const char *s1, const char *s2);
 void				validator(t_data *data, int argc, char *argv[]);
 void				bad_input(t_data *data, char *error);
 int					ft_whitespace(char c);
+int					keypressed(int keycode, t_data *data);
+int					keyreleased(int keycode, t_data *data);
+int					frames(t_data *data);
+void				drawer(t_data *data, int x, double textx);
+void				drawing(t_data *data, int x, double texpos, double textx);
+int					calc_drawline(t_data *data);
 #endif

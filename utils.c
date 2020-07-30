@@ -6,13 +6,13 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 14:40:33 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 10:25:42 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 17:38:03 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_strjoinnl(char const *s1, char const *s2)
+char	*ft_strjoinnl(char *s1, char *s2)
 {
 	int		i;
 	int		k;
@@ -38,6 +38,7 @@ char	*ft_strjoinnl(char const *s1, char const *s2)
 		k++;
 		i++;
 	}
+	free(s1);
 	bruh[i] = '\0';
 	return (bruh);
 }

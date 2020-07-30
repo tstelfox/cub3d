@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/15 18:13:18 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/23 12:36:48 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 18:04:28 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ void		sprites_coord(t_data *data)
 		{
 			if (data->maparr[y][x] == '2')
 			{
-				store_coord(data, y, x, i); // Store the correct coordinates for every spriteboi
-				// printf("Coordinates of the sprite are: %f %f\n", data->sprite[i].x, data->sprite[i].y);
+				store_coord(data, y, x, i);
 				i++;
 			}
 			x++;
 		}
 		y++;
 	}
+	// free(sprites);
 }
 
-void		count_sprites(t_data *data)
+void		sprites_init(t_data *data)
 {
 	int i;
 	int thijs;
@@ -61,12 +61,21 @@ void		count_sprites(t_data *data)
 		i++;
 	}
 	data->spritenum = thijs;
+	sprites_coord(data);
 }
 
-void		sprites_init(t_data *data)
+void		sprite_dist(t_data *data)
 {
-	count_sprites(data);
-	sprites_coord(data);
+	int i;
+
+	i = 0;
+	while (i < data->spritenum)
+	{
+		data->sprite[i].dist = ((data->player.posx - data->sprite[i].x)
+			* (data->player.posx - data->sprite[i].x) + (data->player.posy
+			- data->sprite[i].y) * (data->player.posy - data->sprite[i].y));
+		i++;
+	}
 }
 
 void		sprite_order(t_data *data)
@@ -75,13 +84,7 @@ void		sprite_order(t_data *data)
 	int		k;
 	t_thijs	temp;
 
-	i = 0;
-	while (i < data->spritenum)
-	{
-		data->sprite[i].dist = ((data->player.posx - data->sprite[i].x) * (data->player.posx - data->sprite[i].x) +
-			(data->player.posy - data->sprite[i].y) * (data->player.posy - data->sprite[i].y));
-		i++;
-	}
+	sprite_dist(data);
 	i = 0;
 	while (i < data->spritenum - 1)
 	{
@@ -91,19 +94,11 @@ void		sprite_order(t_data *data)
 			if (data->sprite[k].dist < data->sprite[k + 1].dist)
 			{
 				temp = data->sprite[k];
-				// printf("the temp dist here is %f\n", temp.dist);
 				data->sprite[k] = data->sprite[k + 1];
-				// printf("the old dist here is %f\n", data->sprite[k + 1].dist);
 				data->sprite[k + 1] = temp;
-				// printf("the new dist here is %f\n", data->sprite[k + 1].dist);
 			}
 			k++;
 		}
 		i++;
 	}
-	// for (i = 0; i < data->spritenum; i++)
-	// {
-	// 	printf("The ordered x and y of the sprites do be [%d]: %f %f\n", i, data->sprite[i].x, data->sprite[i].y);
-	// 	printf("The ordered dist of the sprites do be [%d]: %f\n", i, data->sprite[i].dist);
-	// }
 }

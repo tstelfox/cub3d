@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 18:32:50 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 17:35:33 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,25 @@
 
 void	data_init(t_data *data)
 {
+	int i;
+
+	ft_bzero(&data->casts, sizeof(t_cast));
+	ft_bzero(&data->ray, sizeof(t_ray));
+	ft_bzero(&data->player, sizeof(t_player));
+	ft_bzero(&data->sprite, sizeof(t_thijs));
+	i = 0;
+	while (i < 4)
+	{
+		ft_bzero(&data->walls[i], sizeof(t_xpm));
+		ft_bzero(&data->tex[i], sizeof(char));
+		i++;
+	}
 	data->resx = 0;
 	data->resy = 0;
-	data->floor.t_rgb.a = 0;
-	data->ceiling.t_rgb.a = 0;
-	data->player.posx = 0;
-	data->player.posy = 0;
-	data->player.planey = 0;
-	data->player.planex = 0;
-	data->ray.mapx = 0;
-	data->ray.mapy = 0;
-	data->ray.camx = 0;
-	data->ray.raydirx = 0;
-	data->ray.raydiry = 0;
-	data->ray.sidedx = 0;
-	data->ray.sidedy = 0;
-	data->ray.deltadx = 0;
-	data->ray.deltady = 0;
-	data->ray.walldist = 0;
-	data->ray.stepx = 0;
-	data->ray.stepy = 0;
-	data->ray.hit = 0;
-	data->ray.side = 0;
-	data->ray.lineheight = 0;
-	data->ray.drawstart = 0;
-	data->ray.drawend = 0;
 	data->ray.mspeed = 0.09;
 	data->ray.rotspeed = 0.07;
 	data->maptemp = NULL;
 	data->save = 0;
-	int i = 0;
-	while (i < 6)
-	{
-		data->ray.key[i] = 0;
-		i++;
-	}
 	i = 0;
 	while (i < 9)
 	{
@@ -77,7 +61,6 @@ int		main(int argc, char *argv[])
 	zero_mlx(&mlx);
 	data.mlx = mlx;
 	validator(&data, argc, argv);
-	// prs_wrld(&data, argc, argv);
 	mlx_start(&data);
 	return (0);
 }
