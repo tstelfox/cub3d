@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/29 19:03:39 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 18:25:36 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ void		get_configs(t_data *data, char *line, int i)
 	if (line[i] == '1')
 		get_map(line, data);
 	free(line);
+	line = NULL;
 }
 
 void		count_configs(t_data *data, char *line, int i)
@@ -251,6 +252,7 @@ int			prs_wrld(t_data *data, int fd)
 	data->maparr = ft_split(data->maptemp, '\n');
 	sprites_init(data);
 	player(data);
+	free(line);
 	free(data->maptemp);
 	return (0);
 }

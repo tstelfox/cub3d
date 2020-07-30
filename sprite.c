@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/15 18:13:18 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 18:04:28 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/07/30 18:21:07 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void		sprites_coord(t_data *data)
 		}
 		y++;
 	}
-	// free(sprites);
 }
 
 void		sprites_init(t_data *data)
