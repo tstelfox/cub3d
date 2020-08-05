@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 18:25:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/05 19:25:05 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,27 @@ void		get_ceiling(char *line, t_data *data, int i)
 
 void		get_sprite(char *line, t_data *data, int i)
 {
-	while (line[i] != '.')
-		i++;
+	// while (line[i] != '.')
+	// 	
+	i = i + 2;
 	data->sprite_addr = ft_strdup(&line[i]);
 }
 
 void		get_texture(char *line, t_data *data, int i, int side)
 {
-	while (line[i] != '.')
-		i++;
+	// while (line[i] != '.')
+		
+	i = i + 3;
 	data->tex[side] = ft_strdup(&line[i]);
 }
 
 void		get_map(char *line, t_data *data)
 {
-	if (!data->maptemp)
+	// printf("Line\n%s\n", line);
+	if (!data->maptemp && !ft_isalpha(line[0]))
 		data->maptemp = ft_strdup(line);
 	else
-		data->maptemp = ft_strjoinnl(data->maptemp, line);
+		data->maptemp = ft_strjoinnl(data->maptemp, line, 0, 0);
 }
 
 void		west_dir(t_data *data)
@@ -205,10 +208,21 @@ void		get_configs(t_data *data, char *line, int i)
 		get_texture(line, data, i, 3);
 	if (line[i] == 'S' && line[i + 1] != 'O')
 		get_sprite(line, data, i);
-	if (line[i] == '1')
+	if (data->parse[8] == 1)
 		get_map(line, data);
 	free(line);
 	line = NULL;
+}
+
+int			elem_check(t_data *data, int i)
+{
+	while (i < 8)
+	{
+		if (data->parse[i] == 0)
+			return(0);
+		i++;
+	}
+	return (1);
 }
 
 void		count_configs(t_data *data, char *line, int i)
@@ -229,12 +243,13 @@ void		count_configs(t_data *data, char *line, int i)
 		data->parse[6] == 0 ? data->parse[6] = 1 : bad_input(data, ERR_ELEM);
 	if (line[i] == 'S' && line[i + 1] != 'O')
 		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(data, ERR_ELEM);
-	if (line[i] == '1')
-	{
+	if (!ft_whitespace(line[i]) && line[i] != 'R' && line[i] != 'F'
+			&& line[i] != 'C' && line[i] != 'N' && line[i] != 'E' &&
+			line[i] != 'S' && line[i] != 'W' && line[i] != '\n'
+			&& line[i] != '1' && line[i] != '\0' && line[i] != '0')
+		bad_input(data, "Error\nUnknown element\n");
+	if (elem_check(data, i))
 		data->parse[8] = 1;
-		while (i < 8)
-			data->parse[i] == 0 ? bad_input(data, ERR_ELEM) : i++;
-	}
 }
 
 int			prs_wrld(t_data *data, int fd)
@@ -245,14 +260,22 @@ int			prs_wrld(t_data *data, int fd)
 	i = 0;
 	while (get_next_line(fd, &line))
 	{
-		// map_check(data, line, i);
 		count_configs(data, line, i);
 		get_configs(data, line, i);
 	}
+	count_configs(data, line, i);
+	get_configs(data, line, i);
+	if (data->parse[8] == 0)
+		bad_input(data, ERR_ELEM);
+	if (data->maptemp == NULL)
+		bad_input(data, ERR_MAP);
 	data->maparr = ft_split(data->maptemp, '\n');
+	map_check(data);
 	sprites_init(data);
-	player(data);
-	free(line);
+	// player(data);
+	// if (line != NULL)
+	// 	free(line);
+	// printf("jesus what %s\n", data->maptemp);
 	free(data->maptemp);
 	return (0);
 }

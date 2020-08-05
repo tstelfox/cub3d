@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 18:12:53 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/05 15:28:16 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	data_init(t_data *data)
 	data->ray.rotspeed = 0.07;
 	data->maptemp = NULL;
 	data->save = 0;
+	data->floor.t_rgb.a = 0;
 	i = 0;
 	while (i < 9)
 	{

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:52:01 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 18:23:06 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/05 15:19:57 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void		validator(t_data *data, int argc, char *argv[])
 			bad_input(data, "Error\nToo many arguments, like yer mum\n");
 	}
 	fd = open(argv[1], O_RDONLY);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	prs_wrld(data, fd);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	close(fd);
 }

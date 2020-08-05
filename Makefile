@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/07/30 17:35:51 by tmullan       ########   odam.nl          #
+#    Updated: 2020/08/05 19:06:59 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ GNL_DIR = ./gnl
 LIBFT = ./libft
 
 OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o sprite_draw.o \
-		quit.o bmp.o validator.o pixel_put_n_get.o movement.o keys.o drawline.o
+		quit.o bmp.o validator.o pixel_put_n_get.o movement.o keys.o drawline.o \
+		map_check.o
 
 # FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
 

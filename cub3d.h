@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 17:38:00 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/05 17:06:58 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ERR_F "Error\nFloor misconfigured\n"
 # define ERR_C "Error\nCeiling misconfigured\n"
 # define ERR_ELEM "Error\nIncorrect amount of configuration elements\n"
+# define ERR_MAP "Error\nYer map is a dose of shite\n"
 
 typedef union		u_colour
 {
@@ -146,7 +147,7 @@ typedef struct		s_data
 int					prs_wrld(t_data *data, int fd);
 void				data_init(t_data *data);
 int					get_next_line(int fd, char **line);
-char				*ft_strjoinnl(char *s1, char *s2);
+char				*ft_strjoinnl(char *s1, char *s2, int i, int k);
 void				mlx_start(t_data *data);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int colour);
 unsigned int		colour_getter(t_data *data, int x, int y, int compass);
@@ -168,4 +169,6 @@ int					frames(t_data *data);
 void				drawer(t_data *data, int x, double textx);
 void				drawing(t_data *data, int x, double texpos, double textx);
 int					calc_drawline(t_data *data);
+void				map_check(t_data *data);
+void				player(t_data *data);
 #endif
