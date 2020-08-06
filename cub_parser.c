@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/05 19:25:05 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 12:43:54 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void		get_res(char *line, t_data *data, int i)
 
 	while (!ft_isdigit(line[i]))
 		!ft_whitespace(line[i]) ? bad_input(data, ERR_RES) : i++;
-	data->resx = ft_atoi(&line[i]);
+	data->resx = ft_atoilong(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
-	data->resy = ft_atoi(&line[i]);
+	data->resy = ft_atoilong(&line[i]);
 	while (ft_isdigit(line[i]) || ft_whitespace(line[i]))
 		i++;
 	while (line[i] != '\0')
@@ -45,20 +45,20 @@ void		get_floor(char *line, t_data *data, int i)
 	temp = 0;
 	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_F);
+	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(data, ERR_F);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.r = temp
 			: bad_input(data, ERR_F);
 	while (ft_isdigit(line[i]))
 		i++;
 	line[i] != ',' ? bad_input(data, ERR_F) : i++;
-	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) :
+	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) :
 			bad_input(data, ERR_F);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.g = temp :
 			bad_input(data, ERR_F);
 	while (ft_isdigit(line[i]))
 		i++;
 	line[i] != ',' ? bad_input(data, ERR_F) : i++;
-	temp = ft_atoi(&line[i]);
+	temp = ft_atoilong(&line[i]);
 	temp <= 255 && temp >= 0 ? data->floor.t_rgb.b = temp :
 			bad_input(data, ERR_F);
 	while (ft_isdigit(line[i]))
@@ -74,19 +74,19 @@ void		get_ceiling(char *line, t_data *data, int i)
 	temp = 0;
 	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_C);
+	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(data, ERR_C);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.r = temp
 			: bad_input(data, ERR_C);
 	while (ft_isdigit(line[i]))
 		i++;
 	line[i] != ',' ? bad_input(data, ERR_C) : i++;
-	ft_isdigit(line[i]) ? temp = ft_atoi(&line[i]) : bad_input(data, ERR_C);
+	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(data, ERR_C);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.g = temp :
 			bad_input(data, ERR_C);
 	while (ft_isdigit(line[i]))
 		i++;
 	line[i] != ',' ? bad_input(data, ERR_C) : i++;
-	temp = ft_atoi(&line[i]);
+	temp = ft_atoilong(&line[i]);
 	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.b = temp :
 			bad_input(data, ERR_C);
 	while (ft_isdigit(line[i]))
@@ -97,23 +97,36 @@ void		get_ceiling(char *line, t_data *data, int i)
 
 void		get_sprite(char *line, t_data *data, int i)
 {
-	// while (line[i] != '.')
-	// 	
-	i = i + 2;
+	int fd;
+
+	while (ft_whitespace(line[i]))
+		i++;
 	data->sprite_addr = ft_strdup(&line[i]);
+	if (ft_strcmp(&data->sprite_addr[ft_strlen(data->sprite_addr) - 4], ".xpm"))
+		bad_input(data, "Error\nTextures must be in .xpm format\n");
+	fd = open(data->sprite_addr, O_RDONLY);
+	if (fd == -1)
+		bad_input(data, "Error\nSprite texture damaged or missing\n");
+	close(fd);
 }
 
 void		get_texture(char *line, t_data *data, int i, int side)
 {
-	// while (line[i] != '.')
-		
-	i = i + 3;
+	int fd;
+
+	while (ft_whitespace(line[i]))
+		i++;
 	data->tex[side] = ft_strdup(&line[i]);
+	if (ft_strcmp(&data->tex[side][ft_strlen(data->tex[side]) - 4], ".xpm"))
+		bad_input(data, "Error\nTextures must be in .xpm format\n");
+	fd = open(data->tex[side], O_RDONLY);
+	if (fd == -1)
+		bad_input(data, "Error\nWall texture damaged or missing\n");
+	close(fd);
 }
 
 void		get_map(char *line, t_data *data)
 {
-	// printf("Line\n%s\n", line);
 	if (!data->maptemp && !ft_isalpha(line[0]))
 		data->maptemp = ft_strdup(line);
 	else
@@ -199,15 +212,15 @@ void		get_configs(t_data *data, char *line, int i)
 	if (line[i] == 'C')
 		get_ceiling(line, data, i + 1);
 	if (line[i] == 'N' && line[i + 1] == 'O')
-		get_texture(line, data, i, 0);
+		get_texture(line, data, i + 2, 0);
 	if (line[i] == 'E' && line[i + 1] == 'A')
-		get_texture(line, data, i, 1);
+		get_texture(line, data, i + 2, 1);
 	if (line[i] == 'S' && line[i + 1] == 'O')
-		get_texture(line, data, i, 2);
+		get_texture(line, data, i + 2, 2);
 	if (line[i] == 'W' && line[i + 1] == 'E')
-		get_texture(line, data, i, 3);
+		get_texture(line, data, i + 2, 3);
 	if (line[i] == 'S' && line[i + 1] != 'O')
-		get_sprite(line, data, i);
+		get_sprite(line, data, i + 1);
 	if (data->parse[8] == 1)
 		get_map(line, data);
 	free(line);
@@ -219,7 +232,7 @@ int			elem_check(t_data *data, int i)
 	while (i < 8)
 	{
 		if (data->parse[i] == 0)
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);

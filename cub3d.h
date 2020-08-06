@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/05 17:06:58 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 12:13:56 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ typedef struct		s_data
 	int				bmp;
 	int				save;
 	int				parse[9];
-	int				resx;
-	int				resy;
+	long			resx;
+	long			resy;
 	int				spritenum;
 	char			*maptemp;
 	char			**maparr;
@@ -171,4 +171,5 @@ void				drawing(t_data *data, int x, double texpos, double textx);
 int					calc_drawline(t_data *data);
 void				map_check(t_data *data);
 void				player(t_data *data);
+long int			ft_atoilong(const char *str);
 #endif
