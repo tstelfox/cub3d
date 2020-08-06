@@ -1,0 +1,16 @@
+R 1080 690
+NO ./texts/relief.xpm
+EA ./texts/wall_2.png
+SO ./texts/wall_3.png
+WE ./texts/wall_4.png
+
+S ./texts/sprite_3.png
+F 133,255,45
+C 255,45,233
+
+
+11111111111
+10001001101
+100000000W1
+10001001101
+11111111111

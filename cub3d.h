@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 16:05:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 18:57:47 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,11 @@ int					movement(t_data *data);
 void				sprites_init(t_data *data);
 void				sprite_order(t_data *data);
 void				sprite_render(t_data *data);
-int					quit(t_data *data);
 void				screenshotter(t_data *data);
 int					ft_strcmp(const char *s1, const char *s2);
 void				validator(t_data *data, int argc, char *argv[]);
-void				bad_input(t_data *data, char *error);
+void				bad_input(char *error);
+int					quit(void);
 int					ft_whitespace(char c);
 int					keypressed(int keycode, t_data *data);
 int					keyreleased(int keycode, t_data *data);
@@ -173,4 +173,5 @@ int					calc_drawline(t_data *data);
 void				map_check(t_data *data);
 void				player(t_data *data);
 long int			ft_atoilong(const char *str);
+char				**ft_split_extra(char const *s, char c);
 #endif
