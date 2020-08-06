@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 12:13:56 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 16:05:36 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct		s_data
 	int				parse[9];
 	long			resx;
 	long			resy;
+	int				maplength;
 	int				spritenum;
 	char			*maptemp;
 	char			**maparr;

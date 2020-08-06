@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 12:43:54 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 16:16:57 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,9 @@ void		player_pos(t_data *data, int i, int k)
 
 void		player(t_data *data)
 {
-	int	i;
-	int	k;
+	int		i;
+	int		k;
+	char	p;
 
 	i = 1;
 	k = 0;
@@ -190,6 +191,9 @@ void		player(t_data *data)
 	{
 		if (ft_isalpha(data->maparr[i][k]))
 		{
+			p = data->maparr[i][k];
+			if (p != 'N' && p != 'S' && p != 'W' && p != 'E')
+				bad_input(data, ERR_MAP);
 			player_pos(data, i, k);
 			data->maparr[i][k] = '0';
 			break ;

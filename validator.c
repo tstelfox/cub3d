@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:52:01 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 12:43:16 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 13:37:35 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void		validator(t_data *data, int argc, char *argv[])
 
 	if (argc == 1)
 		bad_input(data, "Error\nDidn't attach a map file, bleedin eejit\n");
+	if (argc == 2)
+	{
+		if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub"))
+			bad_input(data, "Error\nConfiguration file must be .cub\n");
+	}
 	if (argc == 3)
 	{
 		if (!ft_strcmp(argv[2], "--save"))
