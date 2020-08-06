@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 16:16:57 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 16:39:20 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,12 @@ void		get_texture(char *line, t_data *data, int i, int side)
 		bad_input(data, "Error\nTextures must be in .xpm format\n");
 	fd = open(data->tex[side], O_RDONLY);
 	if (fd == -1)
+	{
+		// printf("The filepath is [%s]\n", data->tex[side]);
+		// printf("side is %d\n", side);
+		// printf("fd is %d\n", fd);
 		bad_input(data, "Error\nWall texture damaged or missing\n");
+	}
 	close(fd);
 }
 

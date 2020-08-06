@@ -1,0 +1,11 @@
+R 1440 900
+NO ./texts/smooth.xpm
+EA ./texts/bricks.xpm
+SO ./texts/rock.xpm
+WE ./texts/relief.xpm
+
+S texts/pharaoh.xpm
+F 133,255,45
+C 255,45,233
+
+1

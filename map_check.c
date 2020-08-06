@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 16:41:28 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 16:19:20 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/06 16:45:37 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		flood_fill(t_data *data, int y, int x, char **floodmap)
 	if (floodmap[y][x] == ' ' || floodmap[y][x] == '\0'
 			|| floodmap[y][x] == '\n' || !floodmap[y][x]
 			|| floodmap[y][x + 1] == '\0' || x == 0
-			|| (y + 1) == data->maplength)
+			|| (y + 1) == data->maplength || y == 0)
 		bad_input(data, ERR_MAP);
 	if (floodmap[y][x] == '0' || floodmap[y][x] == '2')
 		floodmap[y][x] = 'f';
@@ -89,6 +89,13 @@ void		map_check(t_data *data)
 		i++;
 	}
 	flood_fill(data, data->player.posy, data->player.posx, floodmap);
+	i = 0;
+	while (i < data->maplength)
+	{
+		free(floodmap[i]);
+		i++;
+	}
+	free(floodmap);
 	// i = 0;
 	// while (i < data->maplength)
 	// {
