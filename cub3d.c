@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:11:11 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 14:21:08 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	let_it_bzero(t_data *data)
 	ft_bzero(&data->player, sizeof(t_player));
 	ft_bzero(&data->sprite, sizeof(t_thijs));
 	ft_bzero(&data->casts, sizeof(t_cast));
+	ft_bzero(&data->spt, sizeof(t_xpm));
 	i = 0;
 	while (i < 4)
 	{

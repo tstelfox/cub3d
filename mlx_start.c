@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 17:43:39 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 14:22:47 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			init_texture(t_data *data)
 	{
 		data->walls[i].img = mlx_xpm_file_to_image(data->mlx.mlx, data->tex[i],
 			&img_width, &img_height);
+		if (data->walls[i].img == NULL)
+			bad_input("Error\nFuck you for testing this\n");
 		data->walls[i].height = img_height;
 		data->walls[i].width = img_width;
 		free(data->tex[i]);
@@ -50,6 +52,8 @@ void			addr_sprite(t_data *data)
 
 	data->spt.img = mlx_xpm_file_to_image(data->mlx.mlx, data->sprite_addr,
 		&img_width, &img_height);
+	if (data->spt.img == NULL)
+		bad_input("Error\nFuck you for testing this\n");
 	data->spt.height = img_height;
 	data->spt.width = img_width;
 	free(data->sprite_addr);
