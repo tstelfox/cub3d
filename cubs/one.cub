@@ -1,17 +1,17 @@
-R 1440 1000
+R 17000 17000
 NO ./texts/smooth.xpm
 EA ./texts/bricks.xpm
 SO ./texts/rock.xpm
 WE ./texts/relief.xpm
 
 S ./texts/pharaoh.xpm
-F 133,255,45
+F 133,255,2
 C 255,45,233
 
-11111111111
-10001001101
-10000W00001
-10001001101
+111111111111
+102010011010
+100S00000010
+10001201101
 11111111111
 
 

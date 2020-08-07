@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:45:59 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 17:42:00 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 15:19:43 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void			screenshotter(t_data *data)
 {
 	int filesize;
 
+	if (data->resx > 16384 || data->resy > 16384)
+		bad_input("Error\nBmp too large you gonna blow this shit\n");
 	data->bmp = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
 	filesize = data->resx * data->resy * 4 + 54;
-	if (data->resx > 1000000 || data->resy > 1000000)
-		bad_input("Error\nBmp too large you gonna blow this shit\n");
 	bmpheader(data, filesize);
 	bmpcontent(data);
 	close(data->bmp);

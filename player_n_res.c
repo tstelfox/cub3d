@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 13:27:03 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:33:15 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 15:24:39 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void		get_res(char *line, t_data *data, int i)
 		!ft_whitespace(line[i]) ? bad_input(ERR_RES) : i++;
 	if (data->resx <= 0 || data->resy <= 0)
 		bad_input(ERR_RES);
-	if (data->save == 1)
+	if (data->save == 1 && (data->resx > 16384 || data->resy > 16384))
+		bad_input("Error\nBmp too large you gonna blow this shit\n");
+	else if (data->save == 1)
 		return ;
 	mlx_get_screen_size(data->mlx.mlx, &x, &y);
 	if (data->resx > x)

@@ -1,0 +1,21 @@
+R 5000 5000
+NO ./texts/smooth.xpm
+EA ./texts/bricks.xpm
+SO ./texts/rock.xpm
+WE ./texts/relief.xpm
+
+S ./texts/pharaoh.xpm
+C 166,145,80
+F 166,145,80
+
+1111111111111111
+1101111110000021
+1E00002000111111
+10011221101
+10011111111
+10011
+10011
+10011
+10111
+11011
+1111

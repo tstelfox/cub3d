@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/30 15:31:42 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 15:32:22 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 15:02:12 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				keypressed(int keycode, t_data *data)
 	if (keycode == 124)
 		data->ray.key[5] = 1;
 	if (keycode == 53)
-		exit(0);
+		quit();
 	return (0);
 }
 
