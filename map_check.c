@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 16:41:28 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 20:07:00 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 13:09:07 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void		make_floodmap(t_data *data, char **floodmap)
 	i = 0;
 	while (data->maparr[i])
 	{
-		printf("well [%s]\n", data->maparr[i]);
 		floodmap[i] = ft_strdup(data->maparr[i]);
 		i++;
 	}

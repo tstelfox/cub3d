@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/08/06 18:58:20 by tmullan       ########   odam.nl          #
+#    Updated: 2020/08/07 13:33:01 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ LIBFT = ./libft
 
 OBJ = cub3d.o cub_parser.o utils.o mlx_start.o raycaster.o sprite.o sprite_draw.o \
 		quit.o bmp.o validator.o pixel_put_n_get.o movement.o keys.o drawline.o \
-		map_check.o split_extra.o
+		map_check.o split_extra.o utils_texget.o player_n_res.o
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
+# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -fno-omit-frame-pointer
 
 all: $(NAME)
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJ)
 	$(CC) $^ -Llibft -lft -Lgnl -lgnl  -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS)
 	
 %.o: %.c
-	$(CC) $(FLAGS) -Imlx -c $< -o $@
+	$(CC) $(FLAGS) -Imlx -c $< -o $@ -ggdb3
 
 clean:
 	# make clean -C $(MLX_DIR)

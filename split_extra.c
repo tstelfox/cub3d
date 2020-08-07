@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/06 18:46:10 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 19:37:25 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 13:21:53 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_splitlen(const char *s, int len, char a)
 	int i;
 
 	i = 0;
-	if (s[len] == a)
+	if (s[len] == a && s[len + 1] != '\0')
 		return (1);
 	while (s[len] != '\0' && s[len] != a)
 	{
@@ -42,18 +42,19 @@ static int	ft_splitlen(const char *s, int len, char a)
 	return (i);
 }
 
-static char	**ft_strings(char const *s, char c, char **arroios, int i)
+static char	**ft_strings(char const *s, char c, char **arroios, int nos)
 {
 	int		size;
 	int		len;
 	int		all;
+	int		i;
 
+	i = 0;
 	len = 0;
-	while (s[len])
+	while (i < nos)
 	{
 		all = 0;
-		if (s[len] == c)
-			len++;
+		s[len] == c ? len++ : len;
 		size = ft_splitlen(s, len, c);
 		arroios[i] = (char *)malloc(sizeof(char) * (size + 1));
 		if (ft_free(arroios, i))
@@ -77,19 +78,16 @@ static int	ft_sep(char const *s, char c)
 
 	count = 0;
 	i = 0;
-	if (s[i] == 0)
-		return (0);
 	while (s[i])
 	{
-		while ((s[i] == c) && (s[i + 1] != '\0'))
-		{
-			if (s[i] == '\n' && s[i + 1] == '\n')
-				count++;
+		while (s[i] == c)
 			i++;
-		}
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (s[i])
+		{
 			count++;
-		i++;
+			while (s[i] != c && s[i])
+				i++;
+		}
 	}
 	return (count);
 }
@@ -109,9 +107,9 @@ char		**ft_split_extra(char const *s, char c)
 	arroios = (char **)malloc(sizeof(char *) * (nos + 1));
 	if (arroios == 0)
 		return (0);
-	arroios = ft_strings(s, c, arroios, i);
+	arroios = ft_strings(s, c, arroios, nos);
 	if (arroios == 0)
 		return (0);
-	arroios[nos] = 0;
+	arroios[nos] = NULL;
 	return (arroios);
 }

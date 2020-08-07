@@ -6,13 +6,13 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/06 12:03:07 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 13:11:11 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	data_init(t_data *data)
+void	let_it_bzero(t_data *data)
 {
 	int i;
 
@@ -20,6 +20,7 @@ void	data_init(t_data *data)
 	ft_bzero(&data->ray, sizeof(t_ray));
 	ft_bzero(&data->player, sizeof(t_player));
 	ft_bzero(&data->sprite, sizeof(t_thijs));
+	ft_bzero(&data->casts, sizeof(t_cast));
 	i = 0;
 	while (i < 4)
 	{
@@ -27,14 +28,20 @@ void	data_init(t_data *data)
 		ft_bzero(&data->tex[i], sizeof(char));
 		i++;
 	}
+}
+
+void	data_init(t_data *data)
+{
+	int i;
+
 	data->resx = 0;
 	data->resy = 0;
 	data->ray.mspeed = 0.09;
 	data->ray.rotspeed = 0.07;
 	data->maptemp = NULL;
 	data->save = 0;
-	data->floor.t_rgb.a = 0;
-	data->ceiling.t_rgb.a = 0;
+	data->floor.colour = 0;
+	data->ceiling.colour = 0;
 	i = 0;
 	while (i < 9)
 	{
