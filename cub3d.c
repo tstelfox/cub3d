@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:27:44 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 14:21:08 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/07 16:47:47 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	data_init(t_data *data)
 {
 	int i;
 
+	let_it_bzero(data);
 	data->resx = 0;
 	data->resy = 0;
 	data->ray.mspeed = 0.09;
