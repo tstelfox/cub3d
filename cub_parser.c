@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:33:57 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 19:16:32 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,12 @@ void		count_configs(t_data *data, char *line, int i)
 		data->parse[6] == 0 ? data->parse[6] = 1 : bad_input(ERR_ELEM);
 	if (line[i] == 'S' && line[i + 1] != 'O')
 		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(ERR_ELEM);
-	if (!ft_whitespace(line[i]) && line[i] != 'R' && line[i] != 'F'
-			&& line[i] != 'C' && line[i] != 'N' && line[i] != 'E' &&
-			line[i] != 'S' && line[i] != 'W' && line[i] != '\n'
-			&& line[i] != '1' && line[i] != '\0' && line[i] != '0')
+	if (!findchar(line[i], "RFCNESW120\n\0"))
 		bad_input("Error\nUnknown element\n");
 	if (elem_check(data, i))
 		data->parse[8] = 1;
+	if (findchar(line[i], "NSWE") && data->parse[8] == 1)
+		bad_input("Error\nThis is evil\n");
 }
 
 int			prs_wrld(t_data *data, int fd)

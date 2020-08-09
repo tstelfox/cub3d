@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 18:41:30 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 18:59:17 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,4 +180,5 @@ void				get_sprite(char *line, t_data *data, int i);
 void				get_texture(char *line, t_data *data, int i, int side);
 void				get_map(char *line, t_data *data);
 void				get_res(char *line, t_data *data, int i);
+int					findchar(char c, char *set);
 #endif
