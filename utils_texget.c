@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 13:13:23 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 19:26:43 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 22:03:09 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ void		get_texture(char *line, t_data *data, int i, int side)
 	if (fd == -1)
 		bad_input("Error\nWall texture damaged or missing\n");
 	close(fd);
+}
+
+void		get_rgb(char *line, unsigned char *rgb, int i)
+{
+	int temp;
+
+	temp = 0;
+	temp = ft_atoilong(&line[i]);
+	temp <= 255 && temp >= 0 ? *rgb = temp
+			: bad_input(ERR_F);
 }

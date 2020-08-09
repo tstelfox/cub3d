@@ -6,35 +6,45 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 21:10:08 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 22:03:03 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// void		get_rgb(char *line, unsigned char *rgb, int i)
+// {
+// 	int temp;
+
+// 	temp = 0;
+// 	temp = ft_atoilong(&line[i]);
+// 	temp <= 255 && temp >= 0 ? *rgb = temp
+// 			: bad_input(ERR_F);
+// }
+
 void		get_floor(char *line, t_data *data, int i)
 {
-	int temp;
-
-	temp = 0;
 	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(ERR_F);
-	temp <= 255 && temp >= 0 ? data->floor.t_rgb.r = temp
-			: bad_input(ERR_F);
+	ft_isdigit(line[i]) ? get_rgb(line, &data->floor.t_rgb.r, i)
+		: bad_input(ERR_F);
 	while (ft_isdigit(line[i]))
 		i++;
+	while (ft_whitespace(line[i]))
+		i++;
 	line[i] != ',' ? bad_input(ERR_F) : i++;
-	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) :
-			bad_input(ERR_F);
-	temp <= 255 && temp >= 0 ? data->floor.t_rgb.g = temp :
+	while (ft_whitespace(line[i]))
+		i++;
+	ft_isdigit(line[i]) ? get_rgb(line, &data->floor.t_rgb.g, i) :
 			bad_input(ERR_F);
 	while (ft_isdigit(line[i]))
 		i++;
+	while (ft_whitespace(line[i]))
+		i++;
 	line[i] != ',' ? bad_input(ERR_F) : i++;
-	temp = ft_atoilong(&line[i]);
-	temp <= 255 && temp >= 0 ? data->floor.t_rgb.b = temp :
-			bad_input(ERR_F);
+	while (ft_whitespace(line[i]))
+		i++;
+	get_rgb(line, &data->floor.t_rgb.b, i);
 	while (ft_isdigit(line[i]))
 		i++;
 	while (line[i] != '\0')
@@ -43,26 +53,27 @@ void		get_floor(char *line, t_data *data, int i)
 
 void		get_ceiling(char *line, t_data *data, int i)
 {
-	int temp;
-
-	temp = 0;
 	while (ft_whitespace(line[i]))
 		i++;
-	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(ERR_C);
-	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.r = temp
-			: bad_input(ERR_C);
+	ft_isdigit(line[i]) ? get_rgb(line, &data->ceiling.t_rgb.r, i)
+		: bad_input(ERR_C);
 	while (ft_isdigit(line[i]))
 		i++;
-	line[i] != ',' ? bad_input(ERR_C) : i++;
-	ft_isdigit(line[i]) ? temp = ft_atoilong(&line[i]) : bad_input(ERR_C);
-	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.g = temp :
-			bad_input(ERR_C);
-	while (ft_isdigit(line[i]))
+	while (ft_whitespace(line[i]))
 		i++;
 	line[i] != ',' ? bad_input(ERR_C) : i++;
-	temp = ft_atoilong(&line[i]);
-	temp <= 255 && temp >= 0 ? data->ceiling.t_rgb.b = temp :
-			bad_input(ERR_C);
+	while (ft_whitespace(line[i]))
+		i++;
+	ft_isdigit(line[i]) ? get_rgb(line, &data->ceiling.t_rgb.g, i)
+		: bad_input(ERR_C);
+	while (ft_isdigit(line[i]))
+		i++;
+	while (ft_whitespace(line[i]))
+		i++;
+	line[i] != ',' ? bad_input(ERR_C) : i++;
+	while (ft_whitespace(line[i]))
+		i++;
+	get_rgb(line, &data->ceiling.t_rgb.b, i);
 	while (ft_isdigit(line[i]))
 		i++;
 	while (line[i] != '\0')
