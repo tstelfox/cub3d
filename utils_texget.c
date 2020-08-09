@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils2.c                                           :+:    :+:            */
+/*   utils_texget.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 13:13:23 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:23:00 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 19:26:43 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,4 @@ void		get_texture(char *line, t_data *data, int i, int side)
 	if (fd == -1)
 		bad_input("Error\nWall texture damaged or missing\n");
 	close(fd);
-}
-
-void		get_map(char *line, t_data *data)
-{
-	if (!data->maptemp && !ft_isalpha(line[0]))
-		data->maptemp = ft_strdup(line);
-	else
-		data->maptemp = ft_strjoinnl(data->maptemp, line, 0, 0);
 }

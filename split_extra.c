@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/06 18:46:10 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:21:53 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 20:01:34 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@ static int	ft_sep(char const *s, char c)
 	while (s[i])
 	{
 		while (s[i] == c)
+		{
+			if (s[i] == c && s[i + 1] == c)
+				count++;
 			i++;
+		}
 		if (s[i])
 		{
 			count++;

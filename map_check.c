@@ -6,11 +6,19 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 16:41:28 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 18:46:08 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 20:06:20 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void		get_map(char *line, t_data *data)
+{
+	if (!data->maptemp && !ft_isalpha(line[0]))
+		data->maptemp = ft_strdup(line);
+	else
+		data->maptemp = ft_strjoinnl(data->maptemp, line, 0, 0);
+}
 
 int			findchar(char c, char *set)
 {

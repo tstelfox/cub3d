@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 19:16:32 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 20:06:27 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ void		count_configs(t_data *data, char *line, int i)
 		bad_input("Error\nUnknown element\n");
 	if (elem_check(data, i))
 		data->parse[8] = 1;
-	if (findchar(line[i], "NSWE") && data->parse[8] == 1)
-		bad_input("Error\nThis is evil\n");
 }
 
 int			prs_wrld(t_data *data, int fd)
