@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 21:07:36 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 21:10:08 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,7 @@ void		count_configs(t_data *data, char *line, int i)
 	if (line[i] == 'S' && line[i + 1] != 'O')
 		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(ERR_ELEM);
 	if (!findchar(line[i], "RFCNESW120\n\0 ") && !ft_whitespace(line[i]))
-	{
-		printf("what the fuck then [%s]\n", line);
 		bad_input("Error\nUnknown element\n");
-	}
 	if (elem_check(data, i))
 		data->parse[8] = 1;
 }
