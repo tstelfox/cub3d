@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 16:41:28 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:09:07 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 18:46:08 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void		make_floodmap(t_data *data, char **floodmap)
 		i++;
 	data->maplength = i;
 	floodmap = (char **)malloc(sizeof(char *) * i);
+	if (floodmap == 0)
+		bad_input("Error\nMalloc failed\n");
 	i = 0;
 	while (data->maparr[i])
 	{

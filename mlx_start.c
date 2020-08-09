@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 14:38:05 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 14:22:47 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 18:42:59 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,22 @@ void			addr_sprite(t_data *data)
 void			mlx_start(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
-	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, data->resx,
+	if (!data->mlx.mlx)
+		bad_input(ERR_MLX);
+	if (data->save != 1)
+	{
+		data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, data->resx,
 			data->resy, "mumyer");
+		if (!data->mlx.mlx_win)
+			bad_input(ERR_MLX);
+	}
 	data->mlx.img = mlx_new_image(data->mlx.mlx, data->resx, data->resy);
+	if (!data->mlx.img)
+		bad_input(ERR_MLX);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bpp,
 			&data->mlx.linelen, &data->mlx.endian);
+	if (!data->mlx.addr)
+		bad_input(ERR_MLX);
 	init_texture(data);
 	addr_sprite(data);
 	raycaster(data);

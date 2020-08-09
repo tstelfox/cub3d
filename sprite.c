@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/15 18:13:18 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/07/30 18:21:07 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 18:50:48 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void		store_coord(t_data *data, int y, int x, int i)
 	data->sprite[i].y = (double)(y + 0.5);
 }
 
-void		sprites_coord(t_data *data)
+void		sprites_coord(t_data *data, int x)
 {
 	t_thijs		*sprites;
 	int			y;
-	int			x;
 	int			i;
 
-	x = 0;
 	y = 0;
 	i = 0;
 	sprites = malloc(sizeof(t_thijs) * (data->spritenum + 1));
+	if (sprites == 0)
+		bad_input("Error\nMalloc failed\n");
 	data->sprite = sprites;
 	while (data->maparr[y])
 	{
@@ -60,7 +60,7 @@ void		sprites_init(t_data *data)
 		i++;
 	}
 	data->spritenum = thijs;
-	sprites_coord(data);
+	sprites_coord(data, 0);
 }
 
 void		sprite_dist(t_data *data)

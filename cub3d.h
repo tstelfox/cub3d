@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/07 13:33:34 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/09 18:41:30 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERR_C "Error\nCeiling misconfigured\n"
 # define ERR_ELEM "Error\nIncorrect amount of configuration elements\n"
 # define ERR_MAP "Error\nYer map is a dose of shite\n"
+# define ERR_MLX "Error\nMlx malfunction\n"
 
 typedef union		u_colour
 {
