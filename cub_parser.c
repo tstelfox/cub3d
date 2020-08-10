@@ -6,68 +6,68 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/10 11:56:20 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 22:05:05 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/10 20:31:10 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		get_floor(char *line, t_data *data, int i)
+void		get_floor(char *l, t_data *data, int i)
 {
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	ft_isdigit(line[i]) ? get_rgb(line, &data->floor.t_rgb.r, i)
+	ft_isdigit(l[i]) ? grgb(l, &data->floor.t_rgb.r, i, 0)
 		: bad_input(ERR_F);
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(l[i]))
 		i++;
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	line[i] != ',' ? bad_input(ERR_F) : i++;
-	while (ft_whitespace(line[i]))
+	l[i] != ',' ? bad_input(ERR_F) : i++;
+	while (ft_whitespace(l[i]))
 		i++;
-	ft_isdigit(line[i]) ? get_rgb(line, &data->floor.t_rgb.g, i) :
+	ft_isdigit(l[i]) ? grgb(l, &data->floor.t_rgb.g, i, 0) :
 			bad_input(ERR_F);
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(l[i]))
 		i++;
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	line[i] != ',' ? bad_input(ERR_F) : i++;
-	while (ft_whitespace(line[i]))
+	l[i] != ',' ? bad_input(ERR_F) : i++;
+	while (ft_whitespace(l[i]))
 		i++;
-	get_rgb(line, &data->floor.t_rgb.b, i);
-	while (ft_isdigit(line[i]))
+	ft_isdigit(l[i]) ? grgb(l, &data->floor.t_rgb.b, i, 0) : bad_input(ERR_F);
+	while (ft_isdigit(l[i]))
 		i++;
-	while (line[i] != '\0')
-		ft_whitespace(line[i]) ? i++ : bad_input(ERR_F);
+	while (l[i] != '\0')
+		ft_whitespace(l[i]) ? i++ : bad_input(ERR_F);
 }
 
-void		get_ceiling(char *line, t_data *data, int i)
+void		get_ceiling(char *l, t_data *data, int i)
 {
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	ft_isdigit(line[i]) ? get_rgb(line, &data->ceiling.t_rgb.r, i)
+	ft_isdigit(l[i]) ? grgb(l, &data->ceiling.t_rgb.r, i, 1)
 		: bad_input(ERR_C);
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(l[i]))
 		i++;
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	line[i] != ',' ? bad_input(ERR_C) : i++;
-	while (ft_whitespace(line[i]))
+	l[i] != ',' ? bad_input(ERR_C) : i++;
+	while (ft_whitespace(l[i]))
 		i++;
-	ft_isdigit(line[i]) ? get_rgb(line, &data->ceiling.t_rgb.g, i)
+	ft_isdigit(l[i]) ? grgb(l, &data->ceiling.t_rgb.g, i, 1)
 		: bad_input(ERR_C);
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(l[i]))
 		i++;
-	while (ft_whitespace(line[i]))
+	while (ft_whitespace(l[i]))
 		i++;
-	line[i] != ',' ? bad_input(ERR_C) : i++;
-	while (ft_whitespace(line[i]))
+	l[i] != ',' ? bad_input(ERR_C) : i++;
+	while (ft_whitespace(l[i]))
 		i++;
-	get_rgb(line, &data->ceiling.t_rgb.b, i);
-	while (ft_isdigit(line[i]))
+	ft_isdigit(l[i]) ? grgb(l, &data->ceiling.t_rgb.b, i, 1) : bad_input(ERR_C);
+	while (ft_isdigit(l[i]))
 		i++;
-	while (line[i] != '\0')
-		ft_whitespace(line[i]) ? i++ : bad_input(ERR_C);
+	while (l[i] != '\0')
+		ft_whitespace(l[i]) ? i++ : bad_input(ERR_C);
 }
 
 void		get_configs(t_data *data, char *line, int i)
@@ -114,6 +114,10 @@ void		count_configs(t_data *data, char *line, int i)
 		data->parse[7] == 0 ? data->parse[7] = 1 : bad_input(ERR_ELEM);
 	if (!findchar(line[i], "RFCNESW120\n\0 ") && !ft_whitespace(line[i]))
 		bad_input("Error\nUnknown element\n");
+	if (line[i] && findchar(line[i], "012 ") && data->parse[8] != 1)
+	{
+		bad_input("Error\nMap is not at bottom or config missing\n");
+	}
 	if (elem_check(data, i))
 		data->parse[8] = 1;
 }

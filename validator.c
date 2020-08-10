@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/25 18:52:01 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 18:38:58 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/10 19:12:40 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		validator(t_data *data, int argc, char *argv[])
 		cub_check(argv);
 	else if (argc == 3)
 	{
+		cub_check(argv);
 		if (!ft_strcmp(argv[2], "--save"))
 			data->save = 1;
 		else

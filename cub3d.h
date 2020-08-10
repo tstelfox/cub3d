@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 13:30:00 by tmullan       #+#    #+#                 */
-/*   Updated: 2020/08/09 22:03:24 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/08/10 19:58:36 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,5 +181,5 @@ void				get_texture(char *line, t_data *data, int i, int side);
 void				get_map(char *line, t_data *data);
 void				get_res(char *line, t_data *data, int i);
 int					findchar(char c, char *set);
-void				get_rgb(char *line, unsigned char *rgb, int i);
+void				grgb(char *line, unsigned char *rgb, int i, int flag);
 #endif

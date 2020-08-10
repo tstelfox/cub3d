@@ -6,7 +6,7 @@
 #    By: tmullan <tmullan@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/01 11:53:24 by tmullan       #+#    #+#                  #
-#    Updated: 2020/08/09 19:43:09 by tmullan       ########   odam.nl          #
+#    Updated: 2020/08/10 18:53:58 by tmullan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) -Imlx -c $< -o $@
 
 clean:
-	# make clean -C $(MLX_DIR)
+	make clean -C $(MLX_DIR)
 	make clean -C $(GNL_DIR)
 	make clean -C $(LIBFT)
 	rm -f $(OBJ)
@@ -47,21 +47,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-
-
-
-
-
-
-
-
-
-
-
-# $(NAME): $(OBJ)
-# 	-L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-# 	make -C $(MLX_DIR)
-# 	cp libmlx.dylib .
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
